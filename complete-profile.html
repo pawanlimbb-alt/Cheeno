@@ -145,6 +145,21 @@ h1,h2,h3{font-family:'Big Shoulders Display',sans-serif;font-weight:800;line-hei
       <input id="bio" type="text" placeholder="Short intro about your passion / focus">
     </div>
 
+    <div class="field">
+      <label>Profile Picture <span style="color:var(--muted);font-size:.65rem;">(Optional — Cloudinary)</span></label>
+      <div style="display:flex;align-items:center;gap:.8rem;">
+        <div id="avatar-preview-box" style="width:46px;height:46px;border-radius:50%;background:var(--paper-dim);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:1.1rem;flex-shrink:0;">
+          <img id="avatar-preview-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none;">
+          <span id="avatar-preview-placeholder">👤</span>
+        </div>
+        <label for="avatar-input" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--tack);border:1px dashed var(--tack);padding:.4rem .7rem;border-radius:4px;">
+          Choose photo 📷
+        </label>
+        <input type="file" id="avatar-input" accept="image/*" style="display:none;">
+        <input type="hidden" id="photo-url-val">
+      </div>
+    </div>
+
     <button id="profile-submit" class="btn-pin" type="submit">
       <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1.5 7.5 13 2l-4 11-2.5-4.5L1.5 7.5Z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
       Finish setup
