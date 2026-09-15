@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — CHEENO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --cork:#7A5233; --cork-dark:#4E3220; --cork-light:#8F6440;
+  --paper:#FBF6EC; --paper-dim:#F2EAD8; --line:#E1D3B4;
+  --ink:#231F19; --muted:#8A7A62;
+  --pin:#C1432B; --pin-dark:#9E3320;
+  --tack:#2E6E86; --tack-dark:#215263;
+  --highlight:#EFC94C;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{
+  background:var(--cork);
+  background-image:radial-gradient(rgba(0,0,0,.14) 1px, transparent 1.4px);
+  background-size:9px 9px;
+  color:var(--ink);font-family:'IBM Plex Sans',sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+}
+h1,h2,h3{font-family:'Big Shoulders Display',sans-serif;font-weight:800;line-height:.95;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--tack);font-weight:500;}
+:focus-visible{outline:3px solid var(--tack);outline-offset:2px;}
+
+.pin-dot{width:14px;height:14px;border-radius:50%;background:var(--pin);
+  box-shadow:0 2px 3px rgba(0,0,0,.35), inset 0 -2px 2px rgba(0,0,0,.25), inset 0 1px 1px rgba(255,255,255,.5);
+  position:absolute;left:50%;top:-8px;transform:translateX(-50%);}
+
+.card{
+  position:relative;
+  background:var(--paper);
+  border-radius:8px;
+  width:100%;max-width:400px;
+  padding:2.6rem 2.2rem 2.2rem;
+  box-shadow:0 20px 45px rgba(0,0,0,.35);
+  transform:rotate(-.6deg);
+}
+.card-logo{display:flex;align-items:center;justify-content:center;gap:8px;
+  font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.7rem;
+  margin-bottom:1.6rem;}
+.card h1{font-size:1.7rem;text-align:center;margin-bottom:.5rem;}
+.card p.sub{color:var(--muted);font-size:.92rem;text-align:center;margin-bottom:2rem;}
+
+.google-btn{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:.7rem;
+  background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:5px;
+  padding:.85rem 1rem;font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:.92rem;
+  cursor:pointer;transition:background .15s, box-shadow .15s, transform .15s;
+  box-shadow:0 3px 0 var(--line);
+}
+.google-btn:hover{background:var(--paper-dim);}
+.google-btn:active{transform:translateY(2px);box-shadow:none;}
+.google-btn:disabled{opacity:.6;cursor:default;}
+
+#login-status{
+  display:block;text-align:center;font-family:'IBM Plex Mono',monospace;
+  font-size:.75rem;color:var(--muted);margin-top:1rem;min-height:1em;
+}
+
+.error-msg{
+  display:none;background:#3A1414;color:#F3B4A8;border-radius:5px;
+  padding:.75rem .9rem;font-size:.82rem;margin-top:1.2rem;
+}
+.error-msg.show{display:block;}
+
+.card-foot{margin-top:2rem;padding-top:1.4rem;border-top:1px dashed var(--line);
+  text-align:center;font-size:.78rem;color:var(--muted);}
+.card-foot a{color:var(--tack);text-decoration:none;font-weight:600;}
+.card-foot a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="pin-dot"></div>
+  <div class="card-logo">
+    <svg width="24" height="24" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" fill="#C1432B"/><circle cx="11" cy="8" r="2.4" fill="#FBF6EC"/></svg>
+    CHEENO
+  </div>
+  <span class="eyebrow" style="display:block;text-align:center;margin-bottom:.6rem;">Welcome back</span>
+  <h1>Sign in to your campus</h1>
+  <p class="sub">Use your university Google account. First time here? We'll set up your profile right after.</p>
+
+  <button id="google-signin-btn" class="google-btn" type="button">
+    <svg width="18" height="18" viewBox="0 0 18 18">
+      <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.88 2.7-6.62z"/>
+      <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.98v2.33A9 9 0 0 0 9 18z"/>
+      <path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.16.28-1.7V4.97H.98A9 9 0 0 0 0 9c0 1.45.35 2.83.98 4.03l2.97-2.33z"/>
+      <path fill="#EA4335" d="M9 3.58c1.32 0 2.51.46 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .98 4.97l2.97 2.33C4.66 5.17 6.65 3.58 9 3.58z"/>
+    </svg>
+    Continue with Google
+  </button>
+  <span id="login-status"></span>
+  <div id="login-error" class="error-msg"></div>
+
+  <div class="card-foot">
+    Just exploring? <a href="index.html">Back to the homepage</a>
+  </div>
+</div>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/login.js"></script>
+</body>
+</html>

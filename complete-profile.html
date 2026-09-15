@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete your profile — CHEENO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --cork:#7A5233; --cork-dark:#4E3220; --cork-light:#8F6440;
+  --paper:#FBF6EC; --paper-dim:#F2EAD8; --line:#E1D3B4;
+  --ink:#231F19; --muted:#8A7A62;
+  --pin:#C1432B; --pin-dark:#9E3320;
+  --tack:#2E6E86; --tack-dark:#215263;
+  --highlight:#EFC94C;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{
+  background:var(--cork);
+  background-image:radial-gradient(rgba(0,0,0,.14) 1px, transparent 1.4px);
+  background-size:9px 9px;
+  color:var(--ink);font-family:'IBM Plex Sans',sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  padding:2.5rem 1.5rem;
+}
+h1,h2,h3{font-family:'Big Shoulders Display',sans-serif;font-weight:800;line-height:.95;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--tack);font-weight:500;}
+:focus-visible{outline:3px solid var(--tack);outline-offset:2px;}
+
+.pin-dot{width:14px;height:14px;border-radius:50%;background:var(--pin);
+  box-shadow:0 2px 3px rgba(0,0,0,.35), inset 0 -2px 2px rgba(0,0,0,.25), inset 0 1px 1px rgba(255,255,255,.5);
+  position:absolute;left:50%;top:-8px;transform:translateX(-50%);}
+
+.card{
+  position:relative;
+  background:var(--paper);
+  border-radius:8px;
+  width:100%;max-width:460px;
+  padding:2.6rem 2.2rem 2.2rem;
+  box-shadow:0 20px 45px rgba(0,0,0,.35);
+}
+.card-logo{display:flex;align-items:center;justify-content:center;gap:8px;
+  font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.6rem;
+  margin-bottom:1.4rem;}
+.card h1{font-size:1.6rem;text-align:center;margin-bottom:.5rem;}
+.card p.sub{color:var(--muted);font-size:.9rem;text-align:center;margin-bottom:.4rem;}
+.email-chip{
+  display:block;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.75rem;
+  color:var(--tack);margin-bottom:1.8rem;
+}
+
+.field{margin-bottom:1.1rem;}
+.field label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.72rem;
+  color:var(--muted);margin-bottom:.4rem;}
+.field input,.field select{
+  width:100%;border:1.5px solid var(--line);border-radius:4px;padding:.7rem .85rem;
+  font-family:'IBM Plex Sans',sans-serif;font-size:.9rem;background:#fff;color:var(--ink);
+}
+.field input:focus,.field select:focus{outline:2px solid var(--tack);border-color:var(--tack);}
+.field select:disabled{color:var(--muted);background:var(--paper-dim);}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+.btn-pin{
+  width:100%;justify-content:center;background:var(--pin);color:#fff;border:none;
+  box-shadow:0 4px 0 var(--pin-dark);border-radius:3px;padding:.85rem 1.6rem;
+  font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:.92rem;cursor:pointer;
+  display:flex;align-items:center;gap:.55rem;margin-top:.6rem;
+  transition:transform .15s, box-shadow .15s, background .15s;
+}
+.btn-pin:hover{background:#d14c33;transform:translateY(2px);box-shadow:0 2px 0 var(--pin-dark);}
+.btn-pin:active{transform:translateY(4px);box-shadow:none;}
+.btn-pin:disabled{opacity:.65;cursor:default;transform:none;box-shadow:0 4px 0 var(--pin-dark);}
+
+.error-msg{
+  display:none;background:#3A1414;color:#F3B4A8;border-radius:5px;
+  padding:.75rem .9rem;font-size:.82rem;margin-bottom:1.1rem;
+}
+.error-msg.show{display:block;}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="pin-dot"></div>
+  <div class="card-logo">
+    <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" fill="#C1432B"/><circle cx="11" cy="8" r="2.4" fill="#FBF6EC"/></svg>
+    CHEENO
+  </div>
+  <span class="eyebrow" style="display:block;text-align:center;margin-bottom:.5rem;">One last step</span>
+  <h1>Set up your profile</h1>
+  <p class="sub">We couldn't find an account for</p>
+  <span class="email-chip" id="email-display"></span>
+
+  <div id="profile-error" class="error-msg"></div>
+
+  <form id="profile-form" novalidate>
+    <div class="row-2">
+      <div class="field">
+        <label for="first-name">First name</label>
+        <input id="first-name" type="text" placeholder="First name" required>
+      </div>
+      <div class="field">
+        <label for="last-name">Last name</label>
+        <input id="last-name" type="text" placeholder="Last name" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="department">Department</label>
+      <select id="department" required>
+        <option value="">Select department</option>
+        <option value="BTECH">BTECH</option>
+        <option value="BCA">BCA</option>
+        <option value="BBA">BBA</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="semester">Semester</label>
+      <select id="semester" disabled required>
+        <option value="">Select department first</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="industry">Industry Integrated</label>
+      <select id="industry" required>
+        <option value="">Select an option</option>
+        <option value="None">None</option>
+        <option value="Sunstone">Sunstone</option>
+        <option value="TCS">TCS</option>
+      </select>
+    </div>
+
+    <button id="profile-submit" class="btn-pin" type="submit">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1.5 7.5 13 2l-4 11-2.5-4.5L1.5 7.5Z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      Finish setup
+    </button>
+  </form>
+</div>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/complete-profile.js"></script>
+</body>
+</html>
