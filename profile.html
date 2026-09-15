@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Name] — CHEENO</title>
+    <title>Student Profile — CHEENO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
@@ -19,6 +19,7 @@
             --yellow: #F5C518;
             --pink: #E8738A;
             --muted: #6B5B4E;
+            --card-bg: #FFFFFF;
         }
 
         *,
@@ -63,19 +64,12 @@
             display: flex;
             gap: 4px;
             align-items: baseline;
+            text-decoration: none;
         }
 
-        .nav-logo .nc {
-            color: #fff;
-        }
-
-        .nav-logo .nh {
-            color: var(--orange);
-        }
-
-        .nav-logo .no {
-            color: var(--yellow);
-        }
+        .nav-logo .nc { color: #fff; }
+        .nav-logo .nh { color: var(--orange); }
+        .nav-logo .no { color: var(--yellow); }
 
         .nav-links {
             display: flex;
@@ -95,6 +89,12 @@
         .nav-links a.active,
         .nav-links a:hover {
             color: var(--orange);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .nav-cta {
@@ -117,9 +117,11 @@
         .hero {
             padding-top: 56px;
             display: grid;
-            grid-template-columns: 1fr 440px;
+            grid-template-columns: 1.15fr 0.85fr;
             position: relative;
             overflow: hidden;
+            background: var(--cream);
+            border-bottom: 3px solid var(--charcoal);
         }
 
         .hero::before {
@@ -130,6 +132,7 @@
             bottom: 0;
             width: 8px;
             background: var(--orange);
+            z-index: 2;
         }
 
         .hero-left {
@@ -150,6 +153,7 @@
             font-size: 3.4rem;
             color: #fff;
             position: relative;
+            box-shadow: 6px 6px 0 var(--charcoal);
         }
 
         .avatar-block::after {
@@ -173,12 +177,24 @@
             justify-content: center;
             font-size: 1rem;
             border: 3px solid var(--cream);
+            font-weight: bold;
+            z-index: 3;
         }
 
         .hero-id {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            flex: 1;
+        }
+
+        .hero-meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
         }
 
         .hero-tag {
@@ -187,11 +203,10 @@
             gap: .5rem;
             background: var(--charcoal);
             color: var(--teal);
-            font-size: .6rem;
+            font-size: .62rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            padding: .3rem .7rem;
-            margin-bottom: 1rem;
+            padding: .35rem .75rem;
             width: fit-content;
         }
 
@@ -203,9 +218,32 @@
             border-radius: 50%;
         }
 
+        .btn-edit-profile {
+            background: var(--charcoal);
+            color: var(--yellow);
+            border: 2px solid var(--charcoal);
+            padding: .35rem .85rem;
+            font-family: 'Space Mono', monospace;
+            font-size: .65rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            transition: all .2s;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .btn-edit-profile:hover {
+            background: var(--orange);
+            color: #fff;
+            border-color: var(--orange);
+        }
+
         .hero-name {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.8rem, 6vw, 4.2rem);
+            font-size: clamp(2.6rem, 5vw, 3.8rem);
             line-height: .95;
             letter-spacing: 1px;
             color: var(--charcoal);
@@ -228,9 +266,10 @@
             font-style: italic;
             font-size: 1.05rem;
             color: var(--muted);
-            max-width: 480px;
+            max-width: 540px;
             line-height: 1.65;
             margin-bottom: 1.3rem;
+            white-space: pre-line;
         }
 
         .hero-links {
@@ -243,12 +282,15 @@
             background: transparent;
             color: var(--charcoal);
             border: 2px solid var(--charcoal);
-            padding: .4rem 1rem;
+            padding: .35rem .85rem;
             font-family: 'Space Mono', monospace;
-            font-size: .66rem;
+            font-size: .64rem;
             letter-spacing: 1px;
             text-decoration: none;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
             transition: background .2s, color .2s;
         }
 
@@ -257,86 +299,212 @@
             color: #fff;
         }
 
-        /* Ranking bars — same visual DNA as a skyline, driven by real score data */
+        .link-chip.leetcode-chip {
+            border-color: var(--orange);
+            color: var(--orange);
+            font-weight: bold;
+        }
+
+        .link-chip.leetcode-chip:hover {
+            background: var(--orange);
+            color: #fff;
+        }
+
+        /* LEETCODE & RANKING DASHBOARD (Hero Right) */
         .hero-right {
             position: relative;
             background: var(--charcoal);
-            padding: 2rem 2rem 0;
+            padding: 2.2rem 2.2rem 1.8rem;
             display: flex;
             flex-direction: column;
+            border-left: 3px solid #444;
+            color: #fff;
+        }
+
+        .lc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: .8rem;
         }
 
         .rr-label {
             font-size: .6rem;
             letter-spacing: 3px;
             text-transform: uppercase;
+            color: #aaa;
+        }
+
+        .btn-sync-lc {
+            background: transparent;
+            border: 1px solid var(--yellow);
+            color: var(--yellow);
+            font-family: 'Space Mono', monospace;
+            font-size: .58rem;
+            padding: .2rem .55rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all .2s;
+        }
+
+        .btn-sync-lc:hover {
+            background: var(--yellow);
+            color: var(--charcoal);
+        }
+
+        .btn-sync-lc:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .lc-handle-row {
+            display: flex;
+            align-items: baseline;
+            gap: .6rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .lc-handle {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            color: var(--yellow);
+            letter-spacing: 1px;
+        }
+
+        .lc-global-rank {
+            font-size: .65rem;
+            color: #aaa;
+            letter-spacing: 1px;
+        }
+
+        .lc-global-rank b {
+            color: #fff;
+        }
+
+        .lc-main-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .8rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .lc-stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: .85rem 1rem;
+        }
+
+        .lc-stat-label {
+            font-size: .56rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             color: #999;
+            margin-bottom: .3rem;
+        }
+
+        .lc-stat-val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .lc-stat-val span {
+            font-size: .85rem;
+            color: var(--yellow);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .lc-diff-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .diff-card {
+            background: rgba(0, 0, 0, 0.35);
+            padding: .65rem .75rem;
+            border-top: 3px solid #555;
+        }
+
+        .diff-card.easy { border-color: var(--teal); }
+        .diff-card.medium { border-color: var(--yellow); }
+        .diff-card.hard { border-color: var(--red); }
+
+        .diff-name {
+            font-size: .55rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #aaa;
             margin-bottom: .2rem;
         }
 
-        .rr-score {
+        .diff-count {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
-            color: #fff;
+            font-size: 1.5rem;
             line-height: 1;
+            color: #fff;
         }
 
-        .rr-score span {
+        .diff-bar-track {
+            height: 4px;
+            background: #333;
+            margin-top: .4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diff-bar-fill {
+            height: 100%;
+            transition: width .8s ease;
+        }
+
+        .diff-bar-fill.easy { background: var(--teal); }
+        .diff-bar-fill.medium { background: var(--yellow); }
+        .diff-bar-fill.hard { background: var(--red); }
+
+        .lc-standing-banner {
+            margin-top: auto;
+            background: rgba(232, 96, 10, 0.15);
+            border: 1px dashed var(--orange);
+            padding: .75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lc-standing-text {
+            font-size: .62rem;
+            letter-spacing: 1px;
+            color: #eee;
+        }
+
+        .lc-standing-badge {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
             color: var(--yellow);
-            font-size: 1.1rem;
-            font-family: 'Space Mono', monospace;
             letter-spacing: 1px;
         }
 
-        .bars {
-            flex: 1;
-            display: flex;
-            align-items: flex-end;
-            gap: 10px;
-            padding: 1.5rem 0 0;
-            min-height: 180px;
-        }
-
-        .bar-col {
-            flex: 1;
+        .lc-empty-state {
+            padding: 2.5rem 1rem;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: .5rem;
+            justify-content: center;
+            gap: .8rem;
+            height: 100%;
         }
 
-        .bar {
-            width: 100%;
-            border-radius: 2px 2px 0 0;
-            animation: riseUp .7s cubic-bezier(.16, 1, .3, 1) both;
-        }
-
-        @keyframes riseUp {
-            from {
-                transform: scaleY(0);
-            }
-
-            to {
-                transform: scaleY(1);
-            }
-        }
-
-        .bar {
-            transform-origin: bottom;
-        }
-
-        .bar-cat {
-            font-size: .56rem;
-            letter-spacing: 1px;
-            color: #aaa;
-            text-transform: uppercase;
-            text-align: center;
-        }
-
-        .ground2 {
-            height: 6px;
-            background: #444;
-            margin-top: .6rem;
+        .lc-empty-state p {
+            font-size: .75rem;
+            color: #bbb;
+            max-width: 280px;
+            line-height: 1.5;
         }
 
         /* TICKER */
@@ -349,7 +517,7 @@
             padding: .55rem 0;
             overflow: hidden;
             white-space: nowrap;
-            border-top: 1px solid #444;
+            border-bottom: 2px solid var(--orange);
         }
 
         .ticker-inner {
@@ -359,22 +527,16 @@
         }
 
         @keyframes tick {
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(-50%);
-            }
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
         }
 
-        .tsep {
-            color: var(--orange);
-        }
+        .tsep { color: var(--orange); }
 
         /* SECTION shell */
         .section {
             padding: 3.5rem 3.5rem;
+            position: relative;
         }
 
         .sec-head {
@@ -382,6 +544,8 @@
             justify-content: space-between;
             align-items: flex-end;
             margin-bottom: 1.8rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .sec-head h2 {
@@ -399,7 +563,29 @@
             margin-top: .3rem;
         }
 
-        /* Tag chips grouped by type */
+        .btn-sec-add {
+            background: transparent;
+            border: 2px solid var(--charcoal);
+            color: var(--charcoal);
+            font-family: 'Space Mono', monospace;
+            font-size: .65rem;
+            padding: .4rem .9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            font-weight: 700;
+            transition: all .2s;
+        }
+
+        .btn-sec-add:hover {
+            background: var(--charcoal);
+            color: #fff;
+        }
+
+        /* TAGS */
         .tag-groups {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -410,15 +596,11 @@
             background: #fff;
             border-left: 5px solid var(--teal);
             padding: 1.2rem 1.4rem;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.06);
         }
 
-        .tag-group.hobbies {
-            border-color: var(--pink);
-        }
-
-        .tag-group.interests {
-            border-color: var(--orange);
-        }
+        .tag-group.hobbies { border-color: var(--pink); }
+        .tag-group.interests { border-color: var(--orange); }
 
         .tag-group h3 {
             font-size: .62rem;
@@ -442,15 +624,10 @@
             letter-spacing: .5px;
         }
 
-        .tag-group.hobbies .tchip {
-            background: var(--pink);
-        }
+        .tag-group.hobbies .tchip { background: var(--pink); }
+        .tag-group.interests .tchip { background: var(--orange); }
 
-        .tag-group.interests .tchip {
-            background: var(--orange);
-        }
-
-        /* Projects grid */
+        /* PROJECTS */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -460,9 +637,12 @@
         .proj-card {
             background: #fff;
             border: 2px solid transparent;
-            cursor: default;
             transition: transform .2s, border-color .2s;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.06);
         }
 
         .proj-card:hover {
@@ -476,54 +656,56 @@
 
         .proj-ph {
             width: 100%;
-            height: 150px;
+            height: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.4rem;
         }
 
-        .proj-card.featured .proj-ph {
-            height: 210px;
-        }
+        .proj-card.featured .proj-ph { height: 180px; }
 
-        .bg-p1 {
-            background: linear-gradient(135deg, #1B8A8F22, #1B8A8F55);
-        }
-
-        .bg-p2 {
-            background: linear-gradient(135deg, #E8600A22, #E8600A55);
-        }
-
-        .bg-p3 {
-            background: linear-gradient(135deg, #C0392B22, #C0392B55);
-        }
+        .bg-p1 { background: linear-gradient(135deg, #1B8A8F22, #1B8A8F55); }
+        .bg-p2 { background: linear-gradient(135deg, #E8600A22, #E8600A55); }
+        .bg-p3 { background: linear-gradient(135deg, #C0392B22, #C0392B55); }
 
         .proj-body {
             padding: 1.1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .proj-title {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.02rem;
+            font-size: 1.05rem;
             color: var(--charcoal);
             margin-bottom: .4rem;
         }
 
-        .proj-card.featured .proj-title {
-            font-size: 1.3rem;
-        }
+        .proj-card.featured .proj-title { font-size: 1.3rem; }
 
         .proj-desc {
             font-size: .68rem;
             color: var(--muted);
             line-height: 1.65;
             margin-bottom: .7rem;
+            flex: 1;
+            white-space: pre-line;
+        }
+
+        .proj-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: .6rem;
+            padding-top: .6rem;
+            border-top: 1px dashed #e0d5c1;
         }
 
         .proj-links {
             display: flex;
-            gap: .4rem;
+            gap: .6rem;
             flex-wrap: wrap;
         }
 
@@ -533,19 +715,41 @@
             letter-spacing: .5px;
             text-decoration: none;
             border-bottom: 1px solid var(--teal);
+            font-weight: bold;
         }
 
-        /* Achievements */
+        .plink:hover { color: var(--orange); border-color: var(--orange); }
+
+        .card-owner-actions {
+            display: flex;
+            gap: .4rem;
+        }
+
+        .btn-card-action {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: .65rem;
+            cursor: pointer;
+            padding: .2rem .4rem;
+            transition: color .15s;
+        }
+
+        .btn-card-action:hover { color: var(--orange); }
+        .btn-card-action.del:hover { color: var(--red); }
+
+        /* ACHIEVEMENTS */
         .ach-list {
             display: flex;
             flex-direction: column;
             gap: 1px;
             background: #e8dcc9;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.06);
         }
 
         .ach-row {
             background: #fff;
-            padding: 1rem 1.3rem;
+            padding: 1.1rem 1.3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -556,39 +760,41 @@
             display: flex;
             align-items: center;
             gap: .9rem;
+            flex: 1;
         }
 
         .ach-check {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             flex-shrink: 0;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: .7rem;
+            font-size: .75rem;
             color: #fff;
+            font-weight: bold;
         }
 
-        .ach-check.v {
-            background: var(--teal);
-        }
-
-        .ach-check.p {
-            background: #ccc;
-            color: var(--muted);
-        }
+        .ach-check.v { background: var(--teal); }
+        .ach-check.p { background: #ccc; color: var(--muted); }
 
         .ach-title {
-            font-size: .78rem;
+            font-size: .82rem;
             color: var(--charcoal);
             font-weight: 700;
         }
 
         .ach-desc {
-            font-size: .66rem;
+            font-size: .68rem;
             color: var(--muted);
             margin-top: .15rem;
+        }
+
+        .ach-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .ach-date {
@@ -598,7 +804,7 @@
             white-space: nowrap;
         }
 
-        /* Certifications */
+        /* CERTIFICATIONS */
         .cert-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -608,29 +814,41 @@
         .cert-card {
             background: #fff;
             border-top: 4px solid var(--yellow);
-            padding: 1.1rem 1.2rem;
+            padding: 1.2rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.06);
         }
 
         .cert-title {
-            font-size: .78rem;
+            font-size: .82rem;
             color: var(--charcoal);
             font-weight: 700;
             margin-bottom: .3rem;
         }
 
         .cert-issuer {
-            font-size: .65rem;
+            font-size: .68rem;
             color: var(--muted);
+            flex: 1;
+        }
+
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: .8rem;
+            padding-top: .5rem;
+            border-top: 1px dashed #eee;
         }
 
         .cert-date {
             font-size: .6rem;
             color: #aaa;
-            margin-top: .5rem;
             letter-spacing: .5px;
         }
 
-        /* Clubs strip */
+        /* CLUBS */
         .club-strip {
             display: flex;
             gap: .7rem;
@@ -655,6 +873,211 @@
             letter-spacing: 1px;
         }
 
+        /* MODALS */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(45, 45, 45, 0.7);
+            backdrop-filter: blur(3px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--cream);
+            border: 3px solid var(--charcoal);
+            box-shadow: 10px 10px 0 var(--charcoal);
+            width: 100%;
+            max-width: 580px;
+            padding: 2.2rem;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--charcoal);
+            padding-bottom: .8rem;
+        }
+
+        .modal-head h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            color: var(--charcoal);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: var(--charcoal);
+            font-family: 'Space Mono', monospace;
+            line-height: 1;
+        }
+
+        .modal-tabs {
+            display: flex;
+            gap: .4rem;
+            margin-bottom: 1.4rem;
+            border-bottom: 1px solid #d8ccb8;
+            padding-bottom: .4rem;
+            overflow-x: auto;
+        }
+
+        .mtab {
+            background: none;
+            border: none;
+            font-family: 'Space Mono', monospace;
+            font-size: .65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: .4rem .7rem;
+            cursor: pointer;
+            color: var(--muted);
+            border-bottom: 2px solid transparent;
+        }
+
+        .mtab.active {
+            color: var(--orange);
+            border-color: var(--orange);
+            font-weight: 700;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .form-field {
+            margin-bottom: 1.1rem;
+        }
+
+        .form-field label {
+            display: block;
+            font-size: .65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            margin-bottom: .4rem;
+            font-weight: 700;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            background: #fff;
+            border: 2px solid var(--charcoal);
+            padding: .65rem .8rem;
+            font-family: 'Space Mono', monospace;
+            font-size: .8rem;
+            color: var(--charcoal);
+        }
+
+        .form-field textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            outline: 2px solid var(--orange);
+            border-color: var(--orange);
+        }
+
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .modal-foot {
+            display: flex;
+            justify-content: flex-end;
+            gap: .8rem;
+            margin-top: 1.6rem;
+            border-top: 2px solid var(--charcoal);
+            padding-top: 1.2rem;
+        }
+
+        .btn-cancel {
+            background: transparent;
+            border: 2px solid var(--charcoal);
+            color: var(--charcoal);
+            padding: .6rem 1.2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: .75rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn-save {
+            background: var(--orange);
+            border: 2px solid var(--orange);
+            color: #fff;
+            padding: .6rem 1.4rem;
+            font-family: 'Space Mono', monospace;
+            font-size: .75rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 3px 3px 0 var(--charcoal);
+            transition: transform .1s;
+        }
+
+        .btn-save:hover {
+            background: #c4510a;
+            transform: translateY(-1px);
+        }
+
+        .btn-save:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--charcoal);
+            color: #fff;
+            border-left: 5px solid var(--yellow);
+            padding: 1rem 1.4rem;
+            font-size: .75rem;
+            letter-spacing: 1px;
+            z-index: 2000;
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: slideIn .3s ease;
+        }
+
+        .toast.show { display: block; }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         /* FOOTER */
         footer {
             background: var(--charcoal);
@@ -673,17 +1096,9 @@
             letter-spacing: 1px;
         }
 
-        .flogo .fc {
-            color: #fff;
-        }
-
-        .flogo .fh {
-            color: var(--orange);
-        }
-
-        .flogo .fo {
-            color: var(--yellow);
-        }
+        .flogo .fc { color: #fff; }
+        .flogo .fh { color: var(--orange); }
+        .flogo .fo { color: var(--yellow); }
 
         .fnote {
             font-size: .62rem;
@@ -691,7 +1106,7 @@
             letter-spacing: .5px;
         }
 
-        @media(max-width:900px) {
+        @media(max-width:960px) {
             .hero {
                 grid-template-columns: 1fr;
             }
@@ -702,14 +1117,14 @@
             }
 
             .hero-right {
-                padding: 1.5rem;
+                padding: 2rem 1.5rem;
+                border-left: none;
+                border-top: 3px solid var(--orange);
             }
 
-            .tag-groups {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
+            .tag-groups,
+            .projects-grid,
+            .cert-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -717,16 +1132,12 @@
                 grid-column: auto;
             }
 
-            .cert-grid {
-                grid-template-columns: 1fr;
+            .section {
+                padding: 2.5rem 1.5rem;
             }
 
             .nav-links {
                 display: none;
-            }
-
-            .section {
-                padding: 2.5rem 1.5rem;
             }
         }
     </style>
@@ -736,72 +1147,65 @@
 
     <!-- NAV -->
     <nav>
-        <a href="index.html" class="nav-logo" style="text-decoration:none;"><span class="nc">CHE</span><span class="nh">E</span><span class="no">NO</span></a>
+        <a href="index.html" class="nav-logo"><span class="nc">CHE</span><span class="nh">E</span><span class="no">NO</span></a>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="profile.html" class="active">Profile</a>
             <a href="digitalBoard.html">Board</a>
+            <a href="index.html#rankings">Leaderboard</a>
         </div>
-        <button class="nav-cta" id="nav-signout-btn">Sign out</button>
+        <div class="nav-actions">
+            <button class="nav-cta" id="nav-signout-btn">Sign out</button>
+        </div>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
         <div class="hero-left">
-            <div class="avatar-block" id="avatar">[Initials]<span class="verified-pin" id="verified-pin" title="Verified student">✓</span></div>
+            <div class="avatar-block" id="avatar-block">
+                <span id="avatar-initials">ST</span>
+                <span class="verified-pin" id="verified-pin" title="Verified student">✓</span>
+            </div>
             <div class="hero-id">
-                <div class="hero-tag" id="hero-tag">[Degree] · [Year] · [Section]</div>
-                <h1 class="hero-name" id="hero-name">[Name]</h1>
-                <div class="hero-role" id="hero-role">[Department] · <b>Dept. Rank #[Rank]</b></div>
-                <p class="hero-bio" id="hero-bio">[Bio / short description about yourself]</p>
+                <div class="hero-meta-row">
+                    <div class="hero-tag" id="hero-tag">STUDENT</div>
+                    <button class="btn-edit-profile" id="btn-open-edit" style="display:none;">
+                        ✎ Edit Profile
+                    </button>
+                </div>
+                <h1 class="hero-name" id="hero-name">Loading…</h1>
+                <div class="hero-role" id="hero-role">—</div>
+                <p class="hero-bio" id="hero-bio">Loading bio…</p>
                 <div class="hero-links" id="hero-links">
-                    <a class="link-chip" href="#">GitHub ↗</a>
-                    <a class="link-chip" href="#">LeetCode ↗</a>
-                    <a class="link-chip" href="#">Portfolio ↗</a>
+                    <!-- Dynamic link chips -->
                 </div>
             </div>
         </div>
+
+        <!-- LEETCODE & CAMPUS RANKING DASHBOARD (Hero Right) -->
         <div class="hero-right" id="hero-right">
-            <div class="rr-label">// Overall ranking</div>
-            <div class="rr-score">[Score] <span>pts · #[Rank] in dept</span></div>
-            <div class="bars">
-                <div class="bar-col">
-                    <div class="bar" style="height:88%;background:var(--teal)"></div>
-                    <div class="bar-cat">Coding</div>
-                </div>
-                <div class="bar-col">
-                    <div class="bar" style="height:70%;background:var(--orange)"></div>
-                    <div class="bar-cat">Projects</div>
-                </div>
-                <div class="bar-col">
-                    <div class="bar" style="height:55%;background:var(--red)"></div>
-                    <div class="bar-cat">Academics</div>
-                </div>
-                <div class="bar-col">
-                    <div class="bar" style="height:40%;background:var(--yellow)"></div>
-                    <div class="bar-cat">Community</div>
-                </div>
-                <div class="bar-col">
-                    <div class="bar" style="height:32%;background:var(--pink)"></div>
-                    <div class="bar-cat">Clubs</div>
+            <div class="lc-head">
+                <div class="rr-label">// LEETCODE DASHBOARD</div>
+                <button class="btn-sync-lc" id="btn-sync-leetcode" style="display:none;" title="Sync latest LeetCode stats">
+                    ↻ Sync Stats
+                </button>
+            </div>
+
+            <div id="leetcode-dashboard-content">
+                <div class="lc-empty-state">
+                    <p>Loading LeetCode stats and campus rankings…</p>
                 </div>
             </div>
-            <div class="ground2"></div>
         </div>
     </section>
 
     <!-- TICKER -->
     <div class="ticker">
-        <div class="ticker-inner">
-            <span>[Tag 1]</span><span class="tsep">✦</span><span>[Tag 2]</span><span class="tsep">✦</span>
-            <span>[Tag 3]</span><span class="tsep">✦</span><span>[Tag 4]</span><span
-                class="tsep">✦</span>
-            <span>[Tag 5]</span><span class="tsep">✦</span><span>[Tag 6]</span><span class="tsep">✦</span>
-            <span>[Tag 7]</span><span class="tsep">✦</span><span>[Tag 8]</span><span class="tsep">✦</span>
-            <span>[Tag 1]</span><span class="tsep">✦</span><span>[Tag 2]</span><span class="tsep">✦</span>
-            <span>[Tag 3]</span><span class="tsep">✦</span><span>[Tag 4]</span><span
-                class="tsep">✦</span>
-            <span>[Tag 5]</span><span class="tsep">✦</span><span>[Tag 6]</span><span class="tsep">✦</span>
+        <div class="ticker-inner" id="ticker-inner">
+            <span>DISCOVER</span><span class="tsep">✦</span>
+            <span>BUILD</span><span class="tsep">✦</span>
+            <span>COLLABORATE</span><span class="tsep">✦</span>
+            <span>COMPETE</span><span class="tsep">✦</span>
         </div>
     </div>
 
@@ -809,365 +1213,1321 @@
     <section class="section">
         <div class="sec-head">
             <div>
-                <h2>What <span>[Name]</span> brings</h2>
-                <div class="sec-sub">// skills, hobbies and interests — used to power Discovery matches</div>
+                <h2 id="skills-sec-title">What <span>Student</span> brings</h2>
+                <div class="sec-sub">// skills, hobbies and interests — powers discovery & team matching</div>
             </div>
+            <button class="btn-sec-add" id="btn-edit-tags" style="display:none;">
+                ✎ Edit Tags
+            </button>
         </div>
         <div class="tag-groups">
             <div class="tag-group">
                 <h3>Skills</h3>
-                <div class="tag-chips">
-                    <span class="tchip">[Skill 1]</span><span class="tchip">[Skill 2]</span><span
-                        class="tchip">[Skill 3]</span>
-                    <span class="tchip">[Skill 4]</span><span class="tchip">[Skill 5]</span>
+                <div class="tag-chips" id="skills-chips">
+                    <span style="font-size:.72rem;color:var(--muted);">No skills added yet</span>
                 </div>
             </div>
             <div class="tag-group hobbies">
                 <h3>Hobbies</h3>
-                <div class="tag-chips">
-                    <span class="tchip">[Hobby 1]</span><span class="tchip">[Hobby 2]</span><span
-                        class="tchip">[Hobby 3]</span>
+                <div class="tag-chips" id="hobbies-chips">
+                    <span style="font-size:.72rem;color:var(--muted);">No hobbies added yet</span>
                 </div>
             </div>
             <div class="tag-group interests">
                 <h3>Interests</h3>
-                <div class="tag-chips">
-                    <span class="tchip">[Interest 1]</span><span class="tchip">[Interest 2]</span><span
-                        class="tchip">[Interest 3]</span>
+                <div class="tag-chips" id="interests-chips">
+                    <span style="font-size:.72rem;color:var(--muted);">No interests added yet</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- RECENT PROJECTS -->
     <section class="section" style="background:#fff8ef">
         <div class="sec-head">
-            <h2>Recent <span>projects</span></h2>
+            <div>
+                <h2>Recent <span>projects</span></h2>
+                <div class="sec-sub">// showcase work, repositories and live demos</div>
+            </div>
+            <button class="btn-sec-add" id="btn-add-project" style="display:none;">
+                + Add Project
+            </button>
         </div>
-        <div class="projects-grid">
-            <div class="proj-card featured">
-                <div class="proj-ph bg-p1">🛠️</div>
-                <div class="proj-body">
-                    <div class="proj-title">[Project 1 title]</div>
-                    <p class="proj-desc">[Project 1 description]</p>
-                    <div class="proj-links"><a class="plink" href="#">Repo</a><a class="plink" href="#">Live demo</a>
-                    </div>
-                </div>
-            </div>
-            <div class="proj-card">
-                <div class="proj-ph bg-p2">📊</div>
-                <div class="proj-body">
-                    <div class="proj-title">[Project 2 title]</div>
-                    <p class="proj-desc">[Project 2 description]</p>
-                    <div class="proj-links"><a class="plink" href="#">Repo</a></div>
-                </div>
-            </div>
-            <div class="proj-card">
-                <div class="proj-ph bg-p3">🎮</div>
-                <div class="proj-body">
-                    <div class="proj-title">[Project 3 title]</div>
-                    <p class="proj-desc">[Project 3 description]</p>
-                    <div class="proj-links"><a class="plink" href="#">Repo</a></div>
-                </div>
-            </div>
+        <div class="projects-grid" id="projects-grid">
+            <p style="color:var(--muted);font-size:.85rem;">Loading projects…</p>
         </div>
     </section>
 
     <!-- ACHIEVEMENTS -->
     <section class="section">
         <div class="sec-head">
-            <h2>Achieve<span>ments</span></h2>
-            <div class="sec-sub">Verified by faculty appear with a teal check</div>
+            <div>
+                <h2>Achieve<span>ments</span></h2>
+                <div class="sec-sub">// hackathons, coding contests, awards & faculty verifications</div>
+            </div>
+            <button class="btn-sec-add" id="btn-add-achievement" style="display:none;">
+                + Add Achievement
+            </button>
         </div>
-        <div class="ach-list">
-            <div class="ach-row">
-                <div class="ach-left">
-                    <div class="ach-check v">✓</div>
-                    <div>
-                        <div class="ach-title">[Achievement 1 title]</div>
-                        <div class="ach-desc">[Verified by / Faculty name]</div>
-                    </div>
-                </div>
-                <div class="ach-date">[Date]</div>
-            </div>
-            <div class="ach-row">
-                <div class="ach-left">
-                    <div class="ach-check v">✓</div>
-                    <div>
-                        <div class="ach-title">[Achievement 2 title]</div>
-                        <div class="ach-desc">[Verified by / Faculty name]</div>
-                    </div>
-                </div>
-                <div class="ach-date">[Date]</div>
-            </div>
-            <div class="ach-row">
-                <div class="ach-left">
-                    <div class="ach-check p">…</div>
-                    <div>
-                        <div class="ach-title">[Achievement 3 title]</div>
-                        <div class="ach-desc">[Verification status]</div>
-                    </div>
-                </div>
-                <div class="ach-date">[Date]</div>
-            </div>
+        <div class="ach-list" id="achievements-list">
+            <p style="color:var(--muted);font-size:.85rem;padding:1rem;">Loading achievements…</p>
         </div>
     </section>
 
     <!-- CERTIFICATIONS -->
     <section class="section" style="background:#fff8ef">
         <div class="sec-head">
-            <h2>Certifi<span>cations</span></h2>
+            <div>
+                <h2>Certifi<span>cations</span></h2>
+                <div class="sec-sub">// verified credentials and course certificates</div>
+            </div>
+            <button class="btn-sec-add" id="btn-add-certification" style="display:none;">
+                + Add Certification
+            </button>
         </div>
-        <div class="cert-grid">
-            <div class="cert-card">
-                <div class="cert-title">[Certification 1 title]</div>
-                <div class="cert-issuer">[Issuer]</div>
-                <div class="cert-date">ISSUED [Date]</div>
-            </div>
-            <div class="cert-card">
-                <div class="cert-title">[Certification 2 title]</div>
-                <div class="cert-issuer">[Issuer]</div>
-                <div class="cert-date">ISSUED [Date]</div>
-            </div>
-            <div class="cert-card">
-                <div class="cert-title">[Certification 3 title]</div>
-                <div class="cert-issuer">[Issuer]</div>
-                <div class="cert-date">ISSUED [Date]</div>
-            </div>
+        <div class="cert-grid" id="cert-grid">
+            <p style="color:var(--muted);font-size:.85rem;">Loading certifications…</p>
         </div>
     </section>
 
     <!-- CLUBS -->
     <section class="section">
         <div class="sec-head">
-            <h2>Club <span>memberships</span></h2>
+            <div>
+                <h2>Club <span>memberships</span></h2>
+                <div class="sec-sub">// student organizations, chapters & leadership roles</div>
+            </div>
+            <button class="btn-sec-add" id="btn-add-club" style="display:none;">
+                + Add Club
+            </button>
         </div>
-        <div class="club-strip">
-            <div class="club-chip">[Club 1 name] <span class="role">[Role]</span></div>
-            <div class="club-chip">[Club 2 name] <span class="role">[Role]</span></div>
-            <div class="club-chip">[Club 3 name] <span class="role">[Role]</span></div>
+        <div class="club-strip" id="club-strip">
+            <p style="color:var(--muted);font-size:.85rem;">Loading club memberships…</p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="flogo"><span class="fc">CHE</span><span class="fh">E</span><span class="fo">NO</span></div>
-        <div class="fnote" id="footer-note"></div>
+        <div class="fnote" id="footer-note">CHEENO Campus Platform</div>
     </footer>
 
-<script type="module">
-import { db } from "./js/firebase.js";
-import { getCurrentUser, logOut } from "./js/auth-guard.js";
-import {
-  collection, query, orderBy, getDocs, doc, getDoc
-} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- MODAL: MAIN PROFILE EDIT (BIO, LINKS, TAGS, DETAILS)       -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="edit-profile-modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h3>Edit Profile</h3>
+                <button class="modal-close" onclick="closeModal('edit-profile-modal')">×</button>
+            </div>
 
-async function loadProfile() {
-  const { user, profile: myProfile } = await getCurrentUser();
-  const urlParams = new URLSearchParams(window.location.search);
-  const targetUid = urlParams.get('uid') || user.uid;
+            <div class="modal-tabs">
+                <button class="mtab active" data-tab="tab-basic">Basic &amp; Bio</button>
+                <button class="mtab" data-tab="tab-links">External Links</button>
+                <button class="mtab" data-tab="tab-tags">Tags &amp; Skills</button>
+            </div>
 
-  let p = myProfile;
-  let uid = user.uid;
+            <form id="edit-profile-form">
+                <!-- TAB 1: BASIC & BIO -->
+                <div class="tab-pane active" id="tab-basic">
+                    <div class="form-row-2">
+                        <div class="form-field">
+                            <label for="edit-fname">First Name *</label>
+                            <input type="text" id="edit-fname" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="edit-lname">Last Name *</label>
+                            <input type="text" id="edit-lname" required>
+                        </div>
+                    </div>
 
-  if (targetUid !== user.uid) {
-    try {
-      const snap = await getDoc(doc(db, 'users', targetUid));
-      if (snap.exists()) {
-        p = snap.data();
-        uid = targetUid;
-      }
-    } catch (e) {
-      console.warn("Could not load target user profile:", e);
-    }
-  }
+                    <div class="form-row-2">
+                        <div class="form-field">
+                            <label for="edit-dept">Department *</label>
+                            <select id="edit-dept" required>
+                                <option value="BTECH">BTECH</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BBA">BBA</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="edit-sem">Semester *</label>
+                            <select id="edit-sem" required>
+                                <!-- options dynamically generated -->
+                            </select>
+                        </div>
+                    </div>
 
-  // Page title
-  const fullName = `${p.firstName || ''} ${p.lastName || ''}`.trim() || 'Student';
-  document.title = `${fullName} — CHEENO`;
+                    <div class="form-row-2">
+                        <div class="form-field">
+                            <label for="edit-section">Section</label>
+                            <input type="text" id="edit-section" placeholder="e.g. A, B, CS-1">
+                        </div>
+                        <div class="form-field">
+                            <label for="edit-industry">Industry Integrated</label>
+                            <select id="edit-industry">
+                                <option value="None">None</option>
+                                <option value="Sunstone">Sunstone</option>
+                                <option value="TCS">TCS</option>
+                            </select>
+                        </div>
+                    </div>
 
-  // Hero section
-  const initials = ((p.firstName?.[0] || '') + (p.lastName?.[0] || '')).toUpperCase();
-  const avatarBlock = document.querySelector('.avatar-block');
-  if (avatarBlock) {
-    avatarBlock.childNodes[0].textContent = initials;
-    if (!p.verified) {
-      const pin = avatarBlock.querySelector('.verified-pin');
-      if (pin) pin.style.display = 'none';
-    }
-  }
-
-  const heroTag = document.querySelector('.hero-tag');
-  if (heroTag) heroTag.textContent = `${p.department || ''} · Sem ${p.semester || '?'} · ${p.section || '—'}`;
-
-  const heroName = document.querySelector('.hero-name');
-  if (heroName) heroName.textContent = fullName;
-
-  const heroRole = document.querySelector('.hero-role');
-  if (heroRole) heroRole.innerHTML = `${p.department || ''} · ${p.industryIntegrated && p.industryIntegrated !== 'None' ? p.industryIntegrated : 'No integration'}`;
-
-  const heroBio = document.querySelector('.hero-bio');
-  if (heroBio) heroBio.textContent = p.bio || 'No bio added yet.';
-
-  // External links — hide if not available
-  const heroLinks = document.querySelector('.hero-links');
-  if (heroLinks) heroLinks.innerHTML = '<span style="font-size:.75rem;color:var(--muted);">No external links added yet.</span>';
-
-  // Ranking section — not built yet
-  const rrScore = document.querySelector('.rr-score');
-  if (rrScore) rrScore.innerHTML = '<span style="font-size:.85rem;color:var(--muted);">No ranking data yet</span>';
-  const bars = document.querySelector('.bars');
-  if (bars) bars.innerHTML = '<p style="color:var(--muted);font-size:.75rem;text-align:center;padding:2rem 0;">Rankings are computed nightly from activity.</p>';
-
-  // Ticker — fill with skills + hobbies + interests
-  const allTags = [...(p.skills || []), ...(p.hobbies || []), ...(p.interests || [])];
-  const tickerInner = document.querySelector('.ticker-inner');
-  if (tickerInner) {
-    if (allTags.length) {
-      const tagHtml = allTags.map(t => `<span>${t}</span><span class="tsep">✦</span>`).join('');
-      tickerInner.innerHTML = tagHtml + tagHtml; // duplicate for seamless scroll
-    } else {
-      tickerInner.innerHTML = '<span>Add skills, hobbies & interests to your profile</span>';
-    }
-  }
-
-  // Skills / Hobbies / Interests
-  const skillsChips = document.querySelector('.tag-group:not(.hobbies):not(.interests) .tag-chips');
-  if (skillsChips) {
-    skillsChips.innerHTML = (p.skills || []).length
-      ? p.skills.map(s => `<span class="tchip">${s}</span>`).join('')
-      : '<span style="font-size:.72rem;color:var(--muted);">No skills added yet</span>';
-  }
-
-  const hobbiesChips = document.querySelector('.tag-group.hobbies .tag-chips');
-  if (hobbiesChips) {
-    hobbiesChips.innerHTML = (p.hobbies || []).length
-      ? p.hobbies.map(h => `<span class="tchip">${h}</span>`).join('')
-      : '<span style="font-size:.72rem;color:var(--muted);">No hobbies added yet</span>';
-  }
-
-  const interestsChips = document.querySelector('.tag-group.interests .tag-chips');
-  if (interestsChips) {
-    interestsChips.innerHTML = (p.interests || []).length
-      ? p.interests.map(i => `<span class="tchip">${i}</span>`).join('')
-      : '<span style="font-size:.72rem;color:var(--muted);">No interests added yet</span>';
-  }
-
-  // Section heading with name
-  const secHeadH2 = document.querySelector('.section .sec-head h2');
-  if (secHeadH2 && secHeadH2.textContent.includes('[Name]')) {
-    secHeadH2.innerHTML = `What <span>${p.firstName || 'you'}</span> brings`;
-  }
-
-  // Projects subcollection
-  const projGrid = document.querySelector('.projects-grid');
-  if (projGrid) {
-    try {
-      const projSnap = await getDocs(query(collection(db, 'users', uid, 'projects'), orderBy('createdAt', 'desc')));
-      if (projSnap.empty) {
-        projGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">No projects added yet. Edit your profile to add some!</p>';
-      } else {
-        const bgClasses = ['bg-p1', 'bg-p2', 'bg-p3'];
-        const emojis = ['🛠️', '📊', '🎮', '💡', '🚀'];
-        projGrid.innerHTML = projSnap.docs.map((d, i) => {
-          const proj = d.data();
-          const links = (proj.links || []).map(l => `<a class="plink" href="${l}" target="_blank">Link</a>`).join('');
-          return `
-            <div class="proj-card ${i === 0 ? 'featured' : ''}">
-              <div class="proj-ph ${bgClasses[i % 3]}">${emojis[i % 5]}</div>
-              <div class="proj-body">
-                <div class="proj-title">${proj.title || 'Untitled'}</div>
-                <p class="proj-desc">${proj.description || ''}</p>
-                <div class="proj-links">${links}</div>
-              </div>
-            </div>`;
-        }).join('');
-      }
-    } catch (e) {
-      console.warn('Failed to load projects:', e);
-      projGrid.innerHTML = '<p style="color:var(--muted);">Could not load projects.</p>';
-    }
-  }
-
-  // Achievements subcollection
-  const achList = document.querySelector('.ach-list');
-  if (achList) {
-    try {
-      const achSnap = await getDocs(collection(db, 'users', uid, 'achievements'));
-      if (achSnap.empty) {
-        achList.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">No achievements yet.</p>';
-      } else {
-        achList.innerHTML = achSnap.docs.map(d => {
-          const a = d.data();
-          const checkClass = a.verified ? 'v' : 'p';
-          const checkSymbol = a.verified ? '✓' : '…';
-          const desc = a.verified ? `Verified by ${a.verifiedBy || 'faculty'}` : 'Pending verification';
-          const dateStr = a.date?.toDate ? a.date.toDate().toLocaleDateString() : (a.date || '');
-          return `
-            <div class="ach-row">
-              <div class="ach-left">
-                <div class="ach-check ${checkClass}">${checkSymbol}</div>
-                <div>
-                  <div class="ach-title">${a.title || 'Untitled'}</div>
-                  <div class="ach-desc">${desc}</div>
+                    <div class="form-field">
+                        <label for="edit-bio">Bio / About you</label>
+                        <textarea id="edit-bio" placeholder="Write a short summary of what you are working on, your interests, or aspirations..."></textarea>
+                    </div>
                 </div>
-              </div>
-              <div class="ach-date">${dateStr}</div>
-            </div>`;
-        }).join('');
-      }
-    } catch (e) {
-      console.warn('Failed to load achievements:', e);
-      achList.innerHTML = '<p style="color:var(--muted);">Could not load achievements.</p>';
-    }
-  }
 
-  // Certifications subcollection
-  const certGrid = document.querySelector('.cert-grid');
-  if (certGrid) {
-    try {
-      const certSnap = await getDocs(collection(db, 'users', uid, 'certifications'));
-      if (certSnap.empty) {
-        certGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">No certifications added yet.</p>';
-      } else {
-        certGrid.innerHTML = certSnap.docs.map(d => {
-          const c = d.data();
-          const dateStr = c.date?.toDate ? c.date.toDate().toLocaleDateString() : (c.date || '');
-          return `
-            <div class="cert-card">
-              <div class="cert-title">${c.title || 'Untitled'}</div>
-              <div class="cert-issuer">${c.issuer || ''}</div>
-              <div class="cert-date">${dateStr ? 'ISSUED ' + dateStr : ''}</div>
-            </div>`;
-        }).join('');
-      }
-    } catch (e) {
-      console.warn('Failed to load certifications:', e);
-      certGrid.innerHTML = '<p style="color:var(--muted);">Could not load certifications.</p>';
-    }
-  }
+                <!-- TAB 2: EXTERNAL LINKS -->
+                <div class="tab-pane" id="tab-links">
+                    <div class="form-field">
+                        <label for="edit-lc-handle">LeetCode Username <span style="color:var(--orange);font-size:.6rem;">(Powers your ranking &amp; dashboard)</span></label>
+                        <input type="text" id="edit-lc-handle" placeholder="e.g. tourist or leetcode_ninja">
+                    </div>
 
-  // Clubs — not built yet
-  const clubStrip = document.querySelector('.club-strip');
-  if (clubStrip) {
-    clubStrip.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">No club memberships yet.</p>';
-  }
+                    <div class="form-field">
+                        <label for="edit-github">GitHub Profile URL or Username</label>
+                        <input type="text" id="edit-github" placeholder="https://github.com/yourhandle">
+                    </div>
 
-  // Footer note
-  const footerNote = document.getElementById('footer-note');
-  if (footerNote) {
-    const updated = p.updatedAt?.toDate ? p.updatedAt.toDate().toLocaleDateString() : 'recently';
-    footerNote.textContent = `Last updated ${updated} · Data from Firestore`;
-  }
-}
+                    <div class="form-field">
+                        <label for="edit-linkedin">LinkedIn Profile URL</label>
+                        <input type="text" id="edit-linkedin" placeholder="https://linkedin.com/in/yourhandle">
+                    </div>
 
-loadProfile();
+                    <div class="form-field">
+                        <label for="edit-twitter">Twitter / X Profile URL</label>
+                        <input type="text" id="edit-twitter" placeholder="https://x.com/yourhandle">
+                    </div>
 
-// Sign out button
-const signOutBtn = document.getElementById('nav-signout-btn');
-if (signOutBtn) signOutBtn.addEventListener('click', logOut);
-</script>
+                    <div class="form-field">
+                        <label for="edit-portfolio">Personal Portfolio / Website URL</label>
+                        <input type="text" id="edit-portfolio" placeholder="https://yourportfolio.dev">
+                    </div>
+                </div>
 
+                <!-- TAB 3: TAGS & SKILLS -->
+                <div class="tab-pane" id="tab-tags">
+                    <div class="form-field">
+                        <label for="edit-skills">Skills <span style="color:var(--muted);font-size:.6rem;">(Comma-separated)</span></label>
+                        <input type="text" id="edit-skills" placeholder="e.g. React, Python, C++, Figma, Docker">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="edit-hobbies">Hobbies <span style="color:var(--muted);font-size:.6rem;">(Comma-separated)</span></label>
+                        <input type="text" id="edit-hobbies" placeholder="e.g. Chess, Photography, Guitar, Gaming">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="edit-interests">Interests &amp; Topics <span style="color:var(--muted);font-size:.6rem;">(Comma-separated)</span></label>
+                        <input type="text" id="edit-interests" placeholder="e.g. AI/ML, Web3, Distributed Systems, UX">
+                    </div>
+                </div>
+
+                <div class="modal-foot">
+                    <button type="button" class="btn-cancel" onclick="closeModal('edit-profile-modal')">Cancel</button>
+                    <button type="submit" class="btn-save" id="btn-save-profile">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- MODAL: PROJECT (ADD / EDIT)                                 -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h3 id="proj-modal-title">Add Project</h3>
+                <button class="modal-close" onclick="closeModal('project-modal')">×</button>
+            </div>
+            <form id="project-form">
+                <input type="hidden" id="proj-id">
+                <div class="form-field">
+                    <label for="proj-input-title">Project Title *</label>
+                    <input type="text" id="proj-input-title" placeholder="e.g. Real-time Campus Navigator" required>
+                </div>
+                <div class="form-row-2">
+                    <div class="form-field">
+                        <label for="proj-input-emoji">Icon / Emoji</label>
+                        <select id="proj-input-emoji">
+                            <option value="🛠️">🛠️ Tool</option>
+                            <option value="🚀">🚀 Rocket</option>
+                            <option value="📊">📊 Data / Analytics</option>
+                            <option value="🎮">🎮 Game</option>
+                            <option value="💡">💡 Idea / Concept</option>
+                            <option value="🤖">🤖 AI / Bot</option>
+                            <option value="🌐">🌐 Web Platform</option>
+                            <option value="📱">📱 Mobile App</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="proj-input-featured">Featured Highlight</label>
+                        <select id="proj-input-featured">
+                            <option value="false">Standard Card</option>
+                            <option value="true">Featured (Wide)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="proj-input-desc">Description *</label>
+                    <textarea id="proj-input-desc" placeholder="Describe the problem, tech stack, and key features..." required></textarea>
+                </div>
+                <div class="form-row-2">
+                    <div class="form-field">
+                        <label for="proj-input-repo">Repository Link</label>
+                        <input type="url" id="proj-input-repo" placeholder="https://github.com/user/repo">
+                    </div>
+                    <div class="form-field">
+                        <label for="proj-input-demo">Live Demo Link</label>
+                        <input type="url" id="proj-input-demo" placeholder="https://myproject.app">
+                    </div>
+                </div>
+                <div class="modal-foot">
+                    <button type="button" class="btn-cancel" onclick="closeModal('project-modal')">Cancel</button>
+                    <button type="submit" class="btn-save" id="btn-save-project">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- MODAL: ACHIEVEMENT (ADD / EDIT)                             -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="achievement-modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h3 id="ach-modal-title">Add Achievement</h3>
+                <button class="modal-close" onclick="closeModal('achievement-modal')">×</button>
+            </div>
+            <form id="achievement-form">
+                <input type="hidden" id="ach-id">
+                <div class="form-field">
+                    <label for="ach-input-title">Achievement Title *</label>
+                    <input type="text" id="ach-input-title" placeholder="e.g. 1st Place - Smart City Hackathon" required>
+                </div>
+                <div class="form-field">
+                    <label for="ach-input-desc">Organization / Faculty / Description</label>
+                    <input type="text" id="ach-input-desc" placeholder="e.g. Organized by IEEE Student Chapter">
+                </div>
+                <div class="form-field">
+                    <label for="ach-input-date">Date / Year</label>
+                    <input type="text" id="ach-input-date" placeholder="e.g. Oct 2024 or 2024">
+                </div>
+                <div class="modal-foot">
+                    <button type="button" class="btn-cancel" onclick="closeModal('achievement-modal')">Cancel</button>
+                    <button type="submit" class="btn-save" id="btn-save-achievement">Save Achievement</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- MODAL: CERTIFICATION (ADD / EDIT)                           -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="cert-modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h3 id="cert-modal-title">Add Certification</h3>
+                <button class="modal-close" onclick="closeModal('cert-modal')">×</button>
+            </div>
+            <form id="cert-form">
+                <input type="hidden" id="cert-id">
+                <div class="form-field">
+                    <label for="cert-input-title">Certification Title *</label>
+                    <input type="text" id="cert-input-title" placeholder="e.g. AWS Certified Cloud Practitioner" required>
+                </div>
+                <div class="form-field">
+                    <label for="cert-input-issuer">Issuing Organization *</label>
+                    <input type="text" id="cert-input-issuer" placeholder="e.g. Amazon Web Services / Coursera" required>
+                </div>
+                <div class="form-row-2">
+                    <div class="form-field">
+                        <label for="cert-input-date">Date Issued</label>
+                        <input type="text" id="cert-input-date" placeholder="e.g. Sep 2024">
+                    </div>
+                    <div class="form-field">
+                        <label for="cert-input-link">Credential URL</label>
+                        <input type="url" id="cert-input-link" placeholder="https://credential.net/...">
+                    </div>
+                </div>
+                <div class="modal-foot">
+                    <button type="button" class="btn-cancel" onclick="closeModal('cert-modal')">Cancel</button>
+                    <button type="submit" class="btn-save" id="btn-save-cert">Save Certification</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- MODAL: CLUB (ADD / EDIT)                                    -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="club-modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <h3 id="club-modal-title">Add Club Membership</h3>
+                <button class="modal-close" onclick="closeModal('club-modal')">×</button>
+            </div>
+            <form id="club-form">
+                <input type="hidden" id="club-id">
+                <div class="form-field">
+                    <label for="club-input-name">Club / Organization Name *</label>
+                    <input type="text" id="club-input-name" placeholder="e.g. Coding Club, Robotics Society" required>
+                </div>
+                <div class="form-field">
+                    <label for="club-input-role">Role / Position</label>
+                    <input type="text" id="club-input-role" placeholder="e.g. Core Member, Lead, Tech Coordinator">
+                </div>
+                <div class="modal-foot">
+                    <button type="button" class="btn-cancel" onclick="closeModal('club-modal')">Cancel</button>
+                    <button type="submit" class="btn-save" id="btn-save-club">Save Club</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast-msg">Action completed!</div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SCRIPT                                                      -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <script type="module">
+        import { db } from "./js/firebase.js";
+        import { getCurrentUser, logOut } from "./js/auth-guard.js";
+        import { fetchLeetCodeStats, syncUserLeetCode } from "./js/leetcode.js";
+        import {
+            collection, query, orderBy, getDocs, doc, getDoc,
+            setDoc, updateDoc, deleteDoc, addDoc, serverTimestamp, where
+        } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        let currentAuthUser = null;
+        let profileData = null;
+        let profileUid = null;
+        let isOwner = false;
+        let campusUsers = [];
+
+        const SEM_COUNT = {
+            BTECH: 8,
+            BCA: 6,
+            BBA: 6
+        };
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-msg');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3200);
+        }
+
+        window.openModal = function(id) {
+            const m = document.getElementById(id);
+            if (m) m.classList.add('open');
+        };
+
+        window.closeModal = function(id) {
+            const m = document.getElementById(id);
+            if (m) m.classList.remove('open');
+        };
+
+        // Close on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', e => {
+                if (e.target === overlay) overlay.classList.remove('open');
+            });
+        });
+
+        // Tab Switching in Edit Profile Modal
+        document.querySelectorAll('.modal-tabs .mtab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.modal-tabs .mtab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                const targetId = tab.dataset.tab;
+                const pane = document.getElementById(targetId);
+                if (pane) pane.classList.add('active');
+            });
+        });
+
+        // Populate semester select based on department
+        function updateSemesterOptions(dept, selectedSem) {
+            const semSelect = document.getElementById('edit-sem');
+            if (!semSelect) return;
+            const maxSem = SEM_COUNT[dept] || 8;
+            semSelect.innerHTML = Array.from({ length: maxSem }, (_, i) => i + 1)
+                .map(n => `<option value="${n}" ${n == selectedSem ? 'selected' : ''}>Sem ${n}</option>`)
+                .join('');
+        }
+
+        const deptSelect = document.getElementById('edit-dept');
+        if (deptSelect) {
+            deptSelect.addEventListener('change', () => {
+                updateSemesterOptions(deptSelect.value, 1);
+            });
+        }
+
+        // Compute rankings among all students
+        async function calculateCampusRankings(targetUid) {
+            try {
+                const usersSnap = await getDocs(query(collection(db, 'users'), where('profileComplete', '==', true)));
+                campusUsers = usersSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+                // Sort users by LeetCode ranking & score
+                campusUsers.sort((a, b) => {
+                    const rankA = a.leetcodeStats?.ranking || 0;
+                    const rankB = b.leetcodeStats?.ranking || 0;
+                    const solvedA = a.leetcodeStats?.totalSolved || 0;
+                    const solvedB = b.leetcodeStats?.totalSolved || 0;
+
+                    // Valid LeetCode rank (1 is highest)
+                    if (rankA > 0 && rankB > 0) return rankA - rankB;
+                    if (rankA > 0) return -1;
+                    if (rankB > 0) return 1;
+
+                    // Fallback to total solved
+                    return solvedB - solvedA;
+                });
+
+                const campusRankIdx = campusUsers.findIndex(u => u.id === targetUid);
+                const campusRank = campusRankIdx >= 0 ? campusRankIdx + 1 : '—';
+
+                const dept = profileData?.department;
+                const deptUsers = campusUsers.filter(u => u.department === dept);
+                const deptRankIdx = deptUsers.findIndex(u => u.id === targetUid);
+                const deptRank = deptRankIdx >= 0 ? deptRankIdx + 1 : '—';
+
+                return {
+                    campusRank,
+                    deptRank,
+                    totalStudents: campusUsers.length,
+                    totalDeptStudents: deptUsers.length
+                };
+            } catch (err) {
+                console.warn("Could not calculate ranking:", err);
+                return { campusRank: '—', deptRank: '—', totalStudents: 0, totalDeptStudents: 0 };
+            }
+        }
+
+        // Render LeetCode Dashboard
+        async function renderLeetCodeDashboard(stats, rankingInfo) {
+            const container = document.getElementById('leetcode-dashboard-content');
+            const syncBtn = document.getElementById('btn-sync-leetcode');
+
+            if (isOwner) {
+                syncBtn.style.display = 'inline-block';
+            }
+
+            if (!stats || !stats.username) {
+                if (isOwner) {
+                    container.innerHTML = `
+                        <div class="lc-empty-state">
+                            <div style="font-size:2rem;">⚡</div>
+                            <p>Connect your LeetCode account to unlock your coding dashboard and get ranked on the campus leaderboard!</p>
+                            <button class="btn-sec-add" onclick="document.getElementById('btn-open-edit').click()" style="color:#fff;border-color:var(--yellow);background:rgba(245,197,24,0.15);">
+                                + Link LeetCode Profile
+                            </button>
+                        </div>`;
+                } else {
+                    container.innerHTML = `
+                        <div class="lc-empty-state">
+                            <p>No LeetCode profile linked by this student yet.</p>
+                        </div>`;
+                }
+                return;
+            }
+
+            const totalSolved = stats.totalSolved || 0;
+            const easy = stats.easySolved || 0;
+            const med = stats.mediumSolved || 0;
+            const hard = stats.hardSolved || 0;
+            const globalRank = stats.ranking ? `#${stats.ranking.toLocaleString()}` : 'Unranked';
+
+            const maxRef = Math.max(totalSolved, 100);
+            const easyPct = Math.min(100, Math.round((easy / (stats.totalEasy || 900)) * 100));
+            const medPct = Math.min(100, Math.round((med / (stats.totalMedium || 2000)) * 100));
+            const hardPct = Math.min(100, Math.round((hard / (stats.totalHard || 900)) * 100));
+
+            container.innerHTML = `
+                <div class="lc-handle-row">
+                    <a href="${stats.profileUrl || `https://leetcode.com/u/${stats.username}/`}" target="_blank" class="lc-handle" style="text-decoration:none;">
+                        @${stats.username} ↗
+                    </a>
+                    <div class="lc-global-rank">Global Rank: <b>${globalRank}</b></div>
+                </div>
+
+                <div class="lc-main-stats">
+                    <div class="lc-stat-box">
+                        <div class="lc-stat-label">Total Solved</div>
+                        <div class="lc-stat-val">${totalSolved} <span>/ ${stats.totalQuestions || '4000+'}</span></div>
+                    </div>
+                    <div class="lc-stat-box">
+                        <div class="lc-stat-label">Campus Rank</div>
+                        <div class="lc-stat-val">#${rankingInfo.campusRank} <span>of ${rankingInfo.totalStudents}</span></div>
+                    </div>
+                </div>
+
+                <div class="lc-diff-breakdown">
+                    <div class="diff-card easy">
+                        <div class="diff-name">Easy</div>
+                        <div class="diff-count">${easy}</div>
+                        <div class="diff-bar-track"><div class="diff-bar-fill easy" style="width:${easyPct}%"></div></div>
+                    </div>
+                    <div class="diff-card medium">
+                        <div class="diff-name">Medium</div>
+                        <div class="diff-count">${med}</div>
+                        <div class="diff-bar-track"><div class="diff-bar-fill medium" style="width:${medPct}%"></div></div>
+                    </div>
+                    <div class="diff-card hard">
+                        <div class="diff-name">Hard</div>
+                        <div class="diff-count">${hard}</div>
+                        <div class="diff-bar-track"><div class="diff-bar-fill hard" style="width:${hardPct}%"></div></div>
+                    </div>
+                </div>
+
+                <div class="lc-standing-banner">
+                    <div class="lc-standing-text">DEPARTMENT LEADERBOARD</div>
+                    <div class="lc-standing-badge">RANK #${rankingInfo.deptRank} in ${profileData.department || 'DEPT'}</div>
+                </div>
+            `;
+        }
+
+        // Sync LeetCode action
+        document.getElementById('btn-sync-leetcode')?.addEventListener('click', async () => {
+            const btn = document.getElementById('btn-sync-leetcode');
+            const username = profileData.leetcodeUsername;
+            if (!username) {
+                showToast("Please enter your LeetCode username first.");
+                document.getElementById('btn-open-edit').click();
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = "Syncing…";
+            try {
+                const updatedStats = await syncUserLeetCode(profileUid, username);
+                profileData.leetcodeStats = updatedStats;
+                const rankingInfo = await calculateCampusRankings(profileUid);
+                renderLeetCodeDashboard(updatedStats, rankingInfo);
+                showToast("LeetCode stats synced successfully!");
+            } catch (err) {
+                console.error("Sync error:", err);
+                showToast("Could not sync LeetCode stats. Check username.");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "↻ Sync Stats";
+            }
+        });
+
+        // Load & Render Profile
+        async function loadProfile() {
+            const { user, profile: myProfile } = await getCurrentUser();
+            currentAuthUser = user;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetUid = urlParams.get('uid') || user.uid;
+            profileUid = targetUid;
+            isOwner = (targetUid === user.uid);
+
+            let p = myProfile;
+
+            if (targetUid !== user.uid) {
+                try {
+                    const snap = await getDoc(doc(db, 'users', targetUid));
+                    if (snap.exists()) {
+                        p = snap.data();
+                    }
+                } catch (e) {
+                    console.warn("Could not load target user profile:", e);
+                }
+            }
+
+            profileData = p;
+
+            // Show owner controls if isOwner
+            if (isOwner) {
+                document.getElementById('btn-open-edit').style.display = 'inline-flex';
+                document.getElementById('btn-edit-tags').style.display = 'inline-flex';
+                document.getElementById('btn-add-project').style.display = 'inline-flex';
+                document.getElementById('btn-add-achievement').style.display = 'inline-flex';
+                document.getElementById('btn-add-certification').style.display = 'inline-flex';
+                document.getElementById('btn-add-club').style.display = 'inline-flex';
+            }
+
+            // Calculate Rankings
+            const rankingInfo = await calculateCampusRankings(targetUid);
+
+            // Page Title
+            const fullName = `${p.firstName || ''} ${p.lastName || ''}`.trim() || 'Student';
+            document.title = `${fullName} — CHEENO`;
+
+            // Avatar & Tag
+            const initials = ((p.firstName?.[0] || '') + (p.lastName?.[0] || '')).toUpperCase() || 'ST';
+            document.getElementById('avatar-initials').textContent = initials;
+            const pin = document.getElementById('verified-pin');
+            if (pin && !p.verified) pin.style.display = 'none';
+
+            const sectionText = p.section ? ` · Sec ${p.section}` : '';
+            document.getElementById('hero-tag').textContent = `${p.department || 'CAMPUS'} · Sem ${p.semester || '?'}${sectionText}`;
+
+            // Name & Role
+            document.getElementById('hero-name').textContent = fullName;
+            const industry = p.industryIntegrated && p.industryIntegrated !== 'None' ? p.industryIntegrated : 'Direct Program';
+            document.getElementById('hero-role').innerHTML = `${p.department || ''} · ${industry} · <b>Dept Rank #${rankingInfo.deptRank}</b> · <b>Campus Rank #${rankingInfo.campusRank}</b>`;
+
+            // Bio
+            document.getElementById('hero-bio').textContent = p.bio || (isOwner ? 'Click "Edit Profile" to add a bio about yourself!' : 'No bio added yet.');
+
+            // External Links
+            const links = p.links || {};
+            const heroLinks = document.getElementById('hero-links');
+            let linksHtml = '';
+
+            if (p.leetcodeUsername || links.leetcode) {
+                const lcUser = p.leetcodeUsername || 'Profile';
+                const lcUrl = links.leetcode || `https://leetcode.com/u/${lcUser}/`;
+                linksHtml += `<a class="link-chip leetcode-chip" href="${lcUrl}" target="_blank">⚡ LeetCode (@${p.leetcodeUsername || 'profile'}) ↗</a>`;
+            }
+            if (links.github) {
+                const ghUrl = links.github.startsWith('http') ? links.github : `https://github.com/${links.github}`;
+                linksHtml += `<a class="link-chip" href="${ghUrl}" target="_blank">GitHub ↗</a>`;
+            }
+            if (links.linkedin) {
+                const liUrl = links.linkedin.startsWith('http') ? links.linkedin : `https://linkedin.com/in/${links.linkedin}`;
+                linksHtml += `<a class="link-chip" href="${liUrl}" target="_blank">LinkedIn ↗</a>`;
+            }
+            if (links.twitter) {
+                const twUrl = links.twitter.startsWith('http') ? links.twitter : `https://x.com/${links.twitter}`;
+                linksHtml += `<a class="link-chip" href="${twUrl}" target="_blank">Twitter / X ↗</a>`;
+            }
+            if (links.portfolio) {
+                const pfUrl = links.portfolio.startsWith('http') ? links.portfolio : `https://${links.portfolio}`;
+                linksHtml += `<a class="link-chip" href="${pfUrl}" target="_blank">Portfolio ↗</a>`;
+            }
+
+            if (!linksHtml) {
+                linksHtml = `<span style="font-size:.72rem;color:var(--muted);">${isOwner ? 'Add your LeetCode, GitHub & LinkedIn links via Edit Profile.' : 'No external links added.'}</span>`;
+            }
+            heroLinks.innerHTML = linksHtml;
+
+            // Render LeetCode Dashboard
+            renderLeetCodeDashboard(p.leetcodeStats, rankingInfo);
+
+            // Ticker & Skills Heading
+            document.getElementById('skills-sec-title').innerHTML = `What <span>${p.firstName || 'Student'}</span> brings`;
+            const allTags = [...(p.skills || []), ...(p.hobbies || []), ...(p.interests || [])];
+            const tickerInner = document.getElementById('ticker-inner');
+            if (tickerInner) {
+                if (allTags.length) {
+                    const tagHtml = allTags.map(t => `<span>${t}</span><span class="tsep">✦</span>`).join('');
+                    tickerInner.innerHTML = tagHtml + tagHtml;
+                } else {
+                    tickerInner.innerHTML = '<span>ADD SKILLS ✦ HOBBIES ✦ INTERESTS TO YOUR PROFILE</span>';
+                }
+            }
+
+            // Skills / Hobbies / Interests chips
+            document.getElementById('skills-chips').innerHTML = (p.skills || []).length
+                ? p.skills.map(s => `<span class="tchip">${s}</span>`).join('')
+                : `<span style="font-size:.72rem;color:var(--muted);">${isOwner ? 'Click Edit Tags to add your skills' : 'No skills listed'}</span>`;
+
+            document.getElementById('hobbies-chips').innerHTML = (p.hobbies || []).length
+                ? p.hobbies.map(h => `<span class="tchip">${h}</span>`).join('')
+                : `<span style="font-size:.72rem;color:var(--muted);">${isOwner ? 'Click Edit Tags to add hobbies' : 'No hobbies listed'}</span>`;
+
+            document.getElementById('interests-chips').innerHTML = (p.interests || []).length
+                ? p.interests.map(i => `<span class="tchip">${i}</span>`).join('')
+                : `<span style="font-size:.72rem;color:var(--muted);">${isOwner ? 'Click Edit Tags to add interests' : 'No interests listed'}</span>`;
+
+            // Load subcollections
+            await Promise.all([
+                loadProjects(),
+                loadAchievements(),
+                loadCertifications(),
+                loadClubs()
+            ]);
+
+            // Footer note
+            const footerNote = document.getElementById('footer-note');
+            if (footerNote) {
+                const updated = p.updatedAt?.toDate ? p.updatedAt.toDate().toLocaleDateString() : 'recently';
+                footerNote.textContent = `Last updated ${updated} · Powered by CHEENO Platform`;
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        // PROJECTS MANAGEMENT
+        // ═══════════════════════════════════════════════════════════
+        let projectsList = [];
+
+        async function loadProjects() {
+            const grid = document.getElementById('projects-grid');
+            try {
+                const snap = await getDocs(query(collection(db, 'users', profileUid, 'projects'), orderBy('createdAt', 'desc')));
+                projectsList = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+                if (!projectsList.length) {
+                    grid.innerHTML = `<p style="color:var(--muted);font-size:.85rem;">${isOwner ? 'No projects yet. Click "+ Add Project" to highlight your work!' : 'No projects added yet.'}</p>`;
+                    return;
+                }
+
+                const bgClasses = ['bg-p1', 'bg-p2', 'bg-p3'];
+                grid.innerHTML = projectsList.map((proj, idx) => {
+                    const isFeatured = proj.featured ? 'featured' : (idx === 0 && projectsList.length > 2 ? 'featured' : '');
+                    const bgClass = bgClasses[idx % 3];
+                    const emoji = proj.emoji || '🛠️';
+
+                    let linksHtml = '';
+                    if (proj.repoUrl) linksHtml += `<a class="plink" href="${proj.repoUrl}" target="_blank">Repo ↗</a>`;
+                    if (proj.demoUrl) linksHtml += `<a class="plink" href="${proj.demoUrl}" target="_blank">Live Demo ↗</a>`;
+
+                    const ownerControls = isOwner ? `
+                        <div class="card-owner-actions">
+                            <button class="btn-card-action" onclick="window.editProject('${proj.id}')">Edit</button>
+                            <button class="btn-card-action del" onclick="window.deleteProject('${proj.id}')">Delete</button>
+                        </div>
+                    ` : '';
+
+                    return `
+                        <div class="proj-card ${isFeatured}">
+                            <div class="proj-ph ${bgClass}">${emoji}</div>
+                            <div class="proj-body">
+                                <div class="proj-title">${proj.title || 'Untitled'}</div>
+                                <p class="proj-desc">${proj.description || ''}</p>
+                                <div class="proj-footer">
+                                    <div class="proj-links">${linksHtml || '<span style="font-size:.6rem;color:var(--muted)">In development</span>'}</div>
+                                    ${ownerControls}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (err) {
+                console.warn("Error loading projects:", err);
+                grid.innerHTML = `<p style="color:var(--muted);">Could not load projects.</p>`;
+            }
+        }
+
+        document.getElementById('btn-add-project')?.addEventListener('click', () => {
+            document.getElementById('project-form').reset();
+            document.getElementById('proj-id').value = '';
+            document.getElementById('proj-modal-title').textContent = 'Add Project';
+            openModal('project-modal');
+        });
+
+        window.editProject = function(id) {
+            const p = projectsList.find(x => x.id === id);
+            if (!p) return;
+            document.getElementById('proj-id').value = p.id;
+            document.getElementById('proj-input-title').value = p.title || '';
+            document.getElementById('proj-input-desc').value = p.description || '';
+            document.getElementById('proj-input-repo').value = p.repoUrl || '';
+            document.getElementById('proj-input-demo').value = p.demoUrl || '';
+            document.getElementById('proj-input-emoji').value = p.emoji || '🛠️';
+            document.getElementById('proj-input-featured').value = p.featured ? 'true' : 'false';
+            document.getElementById('proj-modal-title').textContent = 'Edit Project';
+            openModal('project-modal');
+        };
+
+        window.deleteProject = async function(id) {
+            if (!confirm("Are you sure you want to delete this project?")) return;
+            try {
+                await deleteDoc(doc(db, 'users', profileUid, 'projects', id));
+                showToast("Project deleted.");
+                loadProjects();
+            } catch (err) {
+                console.error("Delete project failed:", err);
+            }
+        };
+
+        document.getElementById('project-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-save-project');
+            btn.disabled = true;
+
+            const id = document.getElementById('proj-id').value;
+            const title = document.getElementById('proj-input-title').value.trim();
+            const description = document.getElementById('proj-input-desc').value.trim();
+            const repoUrl = document.getElementById('proj-input-repo').value.trim();
+            const demoUrl = document.getElementById('proj-input-demo').value.trim();
+            const emoji = document.getElementById('proj-input-emoji').value;
+            const featured = document.getElementById('proj-input-featured').value === 'true';
+
+            try {
+                const data = {
+                    title,
+                    description,
+                    repoUrl: repoUrl || null,
+                    demoUrl: demoUrl || null,
+                    emoji,
+                    featured,
+                    updatedAt: serverTimestamp()
+                };
+
+                if (id) {
+                    await updateDoc(doc(db, 'users', profileUid, 'projects', id), data);
+                    showToast("Project updated!");
+                } else {
+                    data.createdAt = serverTimestamp();
+                    await addDoc(collection(db, 'users', profileUid, 'projects'), data);
+                    showToast("Project added!");
+                }
+
+                closeModal('project-modal');
+                loadProjects();
+            } catch (err) {
+                console.error("Project save error:", err);
+                showToast("Failed to save project.");
+            } finally {
+                btn.disabled = false;
+            }
+        });
+
+        // ═══════════════════════════════════════════════════════════
+        // ACHIEVEMENTS MANAGEMENT
+        // ═══════════════════════════════════════════════════════════
+        let achievementsList = [];
+
+        async function loadAchievements() {
+            const list = document.getElementById('achievements-list');
+            try {
+                const snap = await getDocs(collection(db, 'users', profileUid, 'achievements'));
+                achievementsList = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+                if (!achievementsList.length) {
+                    list.innerHTML = `<p style="color:var(--muted);font-size:.85rem;background:#fff;padding:1.2rem;">${isOwner ? 'No achievements added yet. Click "+ Add Achievement" to showcase your awards and contest wins!' : 'No achievements listed.'}</p>`;
+                    return;
+                }
+
+                list.innerHTML = achievementsList.map(a => {
+                    const checkClass = a.verified ? 'v' : 'p';
+                    const checkSymbol = a.verified ? '✓' : '✦';
+                    const desc = a.description || (a.verified ? `Verified by ${a.verifiedBy || 'faculty'}` : 'Student achievement');
+
+                    const ownerControls = isOwner ? `
+                        <div class="card-owner-actions">
+                            <button class="btn-card-action" onclick="window.editAchievement('${a.id}')">Edit</button>
+                            <button class="btn-card-action del" onclick="window.deleteAchievement('${a.id}')">Delete</button>
+                        </div>
+                    ` : '';
+
+                    return `
+                        <div class="ach-row">
+                            <div class="ach-left">
+                                <div class="ach-check ${checkClass}">${checkSymbol}</div>
+                                <div>
+                                    <div class="ach-title">${a.title || 'Untitled Achievement'}</div>
+                                    <div class="ach-desc">${desc}</div>
+                                </div>
+                            </div>
+                            <div class="ach-right">
+                                <div class="ach-date">${a.date || ''}</div>
+                                ${ownerControls}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (err) {
+                console.warn("Error loading achievements:", err);
+                list.innerHTML = `<p style="color:var(--muted);padding:1rem;">Could not load achievements.</p>`;
+            }
+        }
+
+        document.getElementById('btn-add-achievement')?.addEventListener('click', () => {
+            document.getElementById('achievement-form').reset();
+            document.getElementById('ach-id').value = '';
+            document.getElementById('ach-modal-title').textContent = 'Add Achievement';
+            openModal('achievement-modal');
+        });
+
+        window.editAchievement = function(id) {
+            const a = achievementsList.find(x => x.id === id);
+            if (!a) return;
+            document.getElementById('ach-id').value = a.id;
+            document.getElementById('ach-input-title').value = a.title || '';
+            document.getElementById('ach-input-desc').value = a.description || '';
+            document.getElementById('ach-input-date').value = a.date || '';
+            document.getElementById('ach-modal-title').textContent = 'Edit Achievement';
+            openModal('achievement-modal');
+        };
+
+        window.deleteAchievement = async function(id) {
+            if (!confirm("Are you sure you want to delete this achievement?")) return;
+            try {
+                await deleteDoc(doc(db, 'users', profileUid, 'achievements', id));
+                showToast("Achievement deleted.");
+                loadAchievements();
+            } catch (err) {
+                console.error("Delete achievement failed:", err);
+            }
+        };
+
+        document.getElementById('achievement-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-save-achievement');
+            btn.disabled = true;
+
+            const id = document.getElementById('ach-id').value;
+            const title = document.getElementById('ach-input-title').value.trim();
+            const description = document.getElementById('ach-input-desc').value.trim();
+            const date = document.getElementById('ach-input-date').value.trim();
+
+            try {
+                const data = {
+                    title,
+                    description: description || null,
+                    date: date || null,
+                    verified: false,
+                    updatedAt: serverTimestamp()
+                };
+
+                if (id) {
+                    await updateDoc(doc(db, 'users', profileUid, 'achievements', id), data);
+                    showToast("Achievement updated!");
+                } else {
+                    data.createdAt = serverTimestamp();
+                    await addDoc(collection(db, 'users', profileUid, 'achievements'), data);
+                    showToast("Achievement added!");
+                }
+
+                closeModal('achievement-modal');
+                loadAchievements();
+            } catch (err) {
+                console.error("Achievement save error:", err);
+                showToast("Failed to save achievement.");
+            } finally {
+                btn.disabled = false;
+            }
+        });
+
+        // ═══════════════════════════════════════════════════════════
+        // CERTIFICATIONS MANAGEMENT
+        // ═══════════════════════════════════════════════════════════
+        let certificationsList = [];
+
+        async function loadCertifications() {
+            const grid = document.getElementById('cert-grid');
+            try {
+                const snap = await getDocs(collection(db, 'users', profileUid, 'certifications'));
+                certificationsList = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+                if (!certificationsList.length) {
+                    grid.innerHTML = `<p style="color:var(--muted);font-size:.85rem;">${isOwner ? 'No certifications added yet. Click "+ Add Certification" to display verified courses.' : 'No certifications listed.'}</p>`;
+                    return;
+                }
+
+                grid.innerHTML = certificationsList.map(c => {
+                    const ownerControls = isOwner ? `
+                        <div class="card-owner-actions">
+                            <button class="btn-card-action" onclick="window.editCertification('${c.id}')">Edit</button>
+                            <button class="btn-card-action del" onclick="window.deleteCertification('${c.id}')">Delete</button>
+                        </div>
+                    ` : '';
+
+                    const linkHtml = c.credentialUrl ? `<a href="${c.credentialUrl}" target="_blank" class="plink" style="font-size:.6rem;">View Credential ↗</a>` : '';
+
+                    return `
+                        <div class="cert-card">
+                            <div class="cert-title">${c.title || 'Untitled Certificate'}</div>
+                            <div class="cert-issuer">${c.issuer || 'Issuer not specified'}</div>
+                            <div class="cert-footer">
+                                <div class="cert-date">${c.date ? 'ISSUED ' + c.date : ''}</div>
+                                <div style="display:flex;align-items:center;gap:.6rem;">
+                                    ${linkHtml}
+                                    ${ownerControls}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (err) {
+                console.warn("Error loading certifications:", err);
+                grid.innerHTML = `<p style="color:var(--muted);">Could not load certifications.</p>`;
+            }
+        }
+
+        document.getElementById('btn-add-certification')?.addEventListener('click', () => {
+            document.getElementById('cert-form').reset();
+            document.getElementById('cert-id').value = '';
+            document.getElementById('cert-modal-title').textContent = 'Add Certification';
+            openModal('cert-modal');
+        });
+
+        window.editCertification = function(id) {
+            const c = certificationsList.find(x => x.id === id);
+            if (!c) return;
+            document.getElementById('cert-id').value = c.id;
+            document.getElementById('cert-input-title').value = c.title || '';
+            document.getElementById('cert-input-issuer').value = c.issuer || '';
+            document.getElementById('cert-input-date').value = c.date || '';
+            document.getElementById('cert-input-link').value = c.credentialUrl || '';
+            document.getElementById('cert-modal-title').textContent = 'Edit Certification';
+            openModal('cert-modal');
+        };
+
+        window.deleteCertification = async function(id) {
+            if (!confirm("Are you sure you want to delete this certification?")) return;
+            try {
+                await deleteDoc(doc(db, 'users', profileUid, 'certifications', id));
+                showToast("Certification deleted.");
+                loadCertifications();
+            } catch (err) {
+                console.error("Delete certification failed:", err);
+            }
+        };
+
+        document.getElementById('cert-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-save-cert');
+            btn.disabled = true;
+
+            const id = document.getElementById('cert-id').value;
+            const title = document.getElementById('cert-input-title').value.trim();
+            const issuer = document.getElementById('cert-input-issuer').value.trim();
+            const date = document.getElementById('cert-input-date').value.trim();
+            const credentialUrl = document.getElementById('cert-input-link').value.trim();
+
+            try {
+                const data = {
+                    title,
+                    issuer,
+                    date: date || null,
+                    credentialUrl: credentialUrl || null,
+                    updatedAt: serverTimestamp()
+                };
+
+                if (id) {
+                    await updateDoc(doc(db, 'users', profileUid, 'certifications', id), data);
+                    showToast("Certification updated!");
+                } else {
+                    data.createdAt = serverTimestamp();
+                    await addDoc(collection(db, 'users', profileUid, 'certifications'), data);
+                    showToast("Certification added!");
+                }
+
+                closeModal('cert-modal');
+                loadCertifications();
+            } catch (err) {
+                console.error("Certification save error:", err);
+                showToast("Failed to save certification.");
+            } finally {
+                btn.disabled = false;
+            }
+        });
+
+        // ═══════════════════════════════════════════════════════════
+        // CLUBS MANAGEMENT
+        // ═══════════════════════════════════════════════════════════
+        let clubsList = [];
+
+        async function loadClubs() {
+            const strip = document.getElementById('club-strip');
+            try {
+                const snap = await getDocs(collection(db, 'users', profileUid, 'clubs'));
+                clubsList = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+                if (!clubsList.length) {
+                    strip.innerHTML = `<p style="color:var(--muted);font-size:.85rem;">${isOwner ? 'No club memberships added yet. Click "+ Add Club" to join or list campus societies!' : 'No club memberships listed.'}</p>`;
+                    return;
+                }
+
+                strip.innerHTML = clubsList.map(c => {
+                    const ownerControls = isOwner ? `
+                        <button class="btn-card-action del" style="color:#aaa;margin-left:4px;" onclick="window.deleteClub('${c.id}')" title="Remove club">✕</button>
+                    ` : '';
+
+                    return `
+                        <div class="club-chip">
+                            <span>${c.name}</span>
+                            <span class="role">${c.role || 'Member'}</span>
+                            ${ownerControls}
+                        </div>
+                    `;
+                }).join('');
+            } catch (err) {
+                console.warn("Error loading clubs:", err);
+                strip.innerHTML = `<p style="color:var(--muted);">Could not load clubs.</p>`;
+            }
+        }
+
+        document.getElementById('btn-add-club')?.addEventListener('click', () => {
+            document.getElementById('club-form').reset();
+            document.getElementById('club-id').value = '';
+            openModal('club-modal');
+        });
+
+        window.deleteClub = async function(id) {
+            if (!confirm("Are you sure you want to remove this club membership?")) return;
+            try {
+                await deleteDoc(doc(db, 'users', profileUid, 'clubs', id));
+                showToast("Club removed.");
+                loadClubs();
+            } catch (err) {
+                console.error("Delete club failed:", err);
+            }
+        };
+
+        document.getElementById('club-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-save-club');
+            btn.disabled = true;
+
+            const name = document.getElementById('club-input-name').value.trim();
+            const role = document.getElementById('club-input-role').value.trim();
+
+            try {
+                await addDoc(collection(db, 'users', profileUid, 'clubs'), {
+                    name,
+                    role: role || 'Member',
+                    createdAt: serverTimestamp()
+                });
+                showToast("Club membership added!");
+                closeModal('club-modal');
+                loadClubs();
+            } catch (err) {
+                console.error("Club save error:", err);
+                showToast("Failed to save club.");
+            } finally {
+                btn.disabled = false;
+            }
+        });
+
+        // ═══════════════════════════════════════════════════════════
+        // MAIN PROFILE EDIT (BIO, LINKS, DETAILS, TAGS)
+        // ═══════════════════════════════════════════════════════════
+        function openMainEditModal(defaultTab = 'tab-basic') {
+            const p = profileData;
+            document.getElementById('edit-fname').value = p.firstName || '';
+            document.getElementById('edit-lname').value = p.lastName || '';
+            document.getElementById('edit-dept').value = p.department || 'BTECH';
+            updateSemesterOptions(p.department || 'BTECH', p.semester || 1);
+            document.getElementById('edit-section').value = p.section || '';
+            document.getElementById('edit-industry').value = p.industryIntegrated || 'None';
+            document.getElementById('edit-bio').value = p.bio || '';
+
+            // Links
+            const links = p.links || {};
+            document.getElementById('edit-lc-handle').value = p.leetcodeUsername || '';
+            document.getElementById('edit-github').value = links.github || '';
+            document.getElementById('edit-linkedin').value = links.linkedin || '';
+            document.getElementById('edit-twitter').value = links.twitter || '';
+            document.getElementById('edit-portfolio').value = links.portfolio || '';
+
+            // Tags
+            document.getElementById('edit-skills').value = (p.skills || []).join(', ');
+            document.getElementById('edit-hobbies').value = (p.hobbies || []).join(', ');
+            document.getElementById('edit-interests').value = (p.interests || []).join(', ');
+
+            // Set active tab
+            document.querySelectorAll('.modal-tabs .mtab').forEach(t => {
+                if (t.dataset.tab === defaultTab) t.click();
+            });
+
+            openModal('edit-profile-modal');
+        }
+
+        document.getElementById('btn-open-edit')?.addEventListener('click', () => openMainEditModal('tab-basic'));
+        document.getElementById('btn-edit-tags')?.addEventListener('click', () => openMainEditModal('tab-tags'));
+
+        document.getElementById('edit-profile-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-save-profile');
+            btn.disabled = true;
+            btn.textContent = "Saving…";
+
+            const firstName = document.getElementById('edit-fname').value.trim();
+            const lastName = document.getElementById('edit-lname').value.trim();
+            const department = document.getElementById('edit-dept').value;
+            const semester = Number(document.getElementById('edit-sem').value);
+            const section = document.getElementById('edit-section').value.trim() || null;
+            const industryIntegrated = document.getElementById('edit-industry').value;
+            const bio = document.getElementById('edit-bio').value.trim() || null;
+
+            const leetcodeHandle = document.getElementById('edit-lc-handle').value.trim();
+            const github = document.getElementById('edit-github').value.trim();
+            const linkedin = document.getElementById('edit-linkedin').value.trim();
+            const twitter = document.getElementById('edit-twitter').value.trim();
+            const portfolio = document.getElementById('edit-portfolio').value.trim();
+
+            const parseTags = str => str.split(',').map(s => s.trim()).filter(Boolean);
+            const skills = parseTags(document.getElementById('edit-skills').value);
+            const hobbies = parseTags(document.getElementById('edit-hobbies').value);
+            const interests = parseTags(document.getElementById('edit-interests').value);
+
+            const links = {
+                github: github || null,
+                linkedin: linkedin || null,
+                twitter: twitter || null,
+                portfolio: portfolio || null,
+                leetcode: leetcodeHandle ? `https://leetcode.com/u/${leetcodeHandle}/` : null
+            };
+
+            let leetcodeStats = profileData.leetcodeStats;
+            const handleChanged = leetcodeHandle !== (profileData.leetcodeUsername || '');
+
+            if (leetcodeHandle && (handleChanged || !leetcodeStats)) {
+                try {
+                    btn.textContent = "Fetching LeetCode stats…";
+                    leetcodeStats = await fetchLeetCodeStats(leetcodeHandle);
+                } catch (lcErr) {
+                    console.warn("LeetCode fetch error:", lcErr);
+                    if (!leetcodeStats) {
+                        leetcodeStats = {
+                            username: leetcodeHandle,
+                            totalSolved: 0,
+                            easySolved: 0,
+                            mediumSolved: 0,
+                            hardSolved: 0,
+                            ranking: 0,
+                            profileUrl: `https://leetcode.com/u/${leetcodeHandle}/`,
+                            lastSyncedAt: new Date().toISOString()
+                        };
+                    }
+                }
+            } else if (!leetcodeHandle) {
+                leetcodeStats = null;
+            }
+
+            try {
+                btn.textContent = "Saving to database…";
+                const updatedFields = {
+                    firstName,
+                    lastName,
+                    department,
+                    semester,
+                    section,
+                    industryIntegrated,
+                    bio,
+                    skills,
+                    hobbies,
+                    interests,
+                    links,
+                    leetcodeUsername: leetcodeHandle || null,
+                    leetcodeStats: leetcodeStats || null,
+                    updatedAt: serverTimestamp()
+                };
+
+                await updateDoc(doc(db, 'users', profileUid), updatedFields);
+                showToast("Profile updated successfully!");
+                closeModal('edit-profile-modal');
+                await loadProfile();
+            } catch (err) {
+                console.error("Save profile error:", err);
+                showToast("Failed to save profile.");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Save Changes";
+            }
+        });
+
+        // Sign Out Button
+        document.getElementById('nav-signout-btn')?.addEventListener('click', logOut);
+
+        // Run
+        loadProfile();
+    </script>
 </body>
 
 </html>
