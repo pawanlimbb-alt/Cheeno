@@ -9,6 +9,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 import { fetchLeetCodeStats } from "./leetcode.js";
+import { uploadToCloudinary } from "./cloudinary.js";
 
 const form = document.getElementById("profile-form");
 const firstNameEl = document.getElementById("first-name");
@@ -19,6 +20,10 @@ const semEl = document.getElementById("semester");
 const industryEl = document.getElementById("industry");
 const leetcodeEl = document.getElementById("leetcode-handle");
 const bioEl = document.getElementById("bio");
+const photoUrlVal = document.getElementById("photo-url-val");
+const avatarInput = document.getElementById("avatar-input");
+const avatarPreviewImg = document.getElementById("avatar-preview-img");
+const avatarPlaceholder = document.getElementById("avatar-preview-placeholder");
 const errorBox = document.getElementById("profile-error");
 const submitBtn = document.getElementById("profile-submit");
 
@@ -56,6 +61,29 @@ function showError(message) {
   errorBox.classList.add("show");
 }
 
+// Handle avatar photo upload
+avatarInput?.addEventListener("change", async (e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  try {
+    submitBtn.disabled = true;
+    const res = await uploadToCloudinary(file, { folder: "cheeno/avatars" });
+    if (res && res.url) {
+      if (photoUrlVal) photoUrlVal.value = res.url;
+      if (avatarPreviewImg) {
+        avatarPreviewImg.src = res.url;
+        avatarPreviewImg.style.display = "block";
+      }
+      if (avatarPlaceholder) avatarPlaceholder.style.display = "none";
+    }
+  } catch (err) {
+    console.error("Avatar upload failed:", err);
+    showError("Could not upload avatar: " + err.message);
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
 // Auth guard: must be signed in. If a completed profile already exists, skip this page.
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -81,6 +109,15 @@ onAuthStateChanged(auth, async (user) => {
     const parts = user.displayName.trim().split(/\s+/);
     firstNameEl.value = firstNameEl.value || parts[0] || "";
     lastNameEl.value = lastNameEl.value || parts.slice(1).join(" ") || "";
+  }
+
+  if (user.photoURL && !photoUrlVal.value) {
+    photoUrlVal.value = user.photoURL;
+    if (avatarPreviewImg) {
+      avatarPreviewImg.src = user.photoURL;
+      avatarPreviewImg.style.display = "block";
+    }
+    if (avatarPlaceholder) avatarPlaceholder.style.display = "none";
   }
 });
 
@@ -144,7 +181,7 @@ form.addEventListener("submit", async (e) => {
       role: "STUDENT",
       firstName,
       lastName,
-      photoUrl: currentUser.photoURL || null,
+      photoUrl: photoUrlVal?.value || currentUser.photoURL || null,
       department,
       semester: Number(semester),
       section: null,

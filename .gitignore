@@ -1,0 +1,17 @@
+﻿# Local environment and private configuration
+.env
+.env.local
+.env.*.local
+*.local.js
+js/config.local.js
+secrets.json
+secrets.md
+credentials.json
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Logs and cache
+*.log
+.cache
