@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Name] — CHEENO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF5E6;
+            --charcoal: #2D2D2D;
+            --orange: #E8600A;
+            --teal: #1B8A8F;
+            --red: #C0392B;
+            --yellow: #F5C518;
+            --pink: #E8738A;
+            --muted: #6B5B4E;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--charcoal);
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 56px;
+            background: var(--charcoal);
+            border-bottom: 3px solid var(--orange);
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            display: flex;
+            gap: 4px;
+            align-items: baseline;
+        }
+
+        .nav-logo .nc {
+            color: #fff;
+        }
+
+        .nav-logo .nh {
+            color: var(--orange);
+        }
+
+        .nav-logo .no {
+            color: var(--yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .nav-links a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: .63rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color .2s;
+            cursor: pointer;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .nav-cta {
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            padding: .45rem 1.1rem;
+            font-family: 'Space Mono', monospace;
+            font-size: .7rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .nav-cta:hover {
+            background: #c4510a;
+        }
+
+        /* HERO */
+        .hero {
+            padding-top: 56px;
+            display: grid;
+            grid-template-columns: 1fr 440px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 56px;
+            bottom: 0;
+            width: 8px;
+            background: var(--orange);
+        }
+
+        .hero-left {
+            padding: 3.5rem 3rem 3rem 3.5rem;
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .avatar-block {
+            flex-shrink: 0;
+            width: 132px;
+            height: 132px;
+            background: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.4rem;
+            color: #fff;
+            position: relative;
+        }
+
+        .avatar-block::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 3px solid var(--charcoal);
+        }
+
+        .verified-pin {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            background: var(--yellow);
+            color: var(--charcoal);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            border: 3px solid var(--cream);
+        }
+
+        .hero-id {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--charcoal);
+            color: var(--teal);
+            font-size: .6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: .3rem .7rem;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--teal);
+            border-radius: 50%;
+        }
+
+        .hero-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.8rem, 6vw, 4.2rem);
+            line-height: .95;
+            letter-spacing: 1px;
+            color: var(--charcoal);
+        }
+
+        .hero-role {
+            font-size: .72rem;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin: .5rem 0 1.1rem;
+            text-transform: uppercase;
+        }
+
+        .hero-role b {
+            color: var(--orange);
+        }
+
+        .hero-bio {
+            font-family: 'DM Serif Display', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 480px;
+            line-height: 1.65;
+            margin-bottom: 1.3rem;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+        }
+
+        .link-chip {
+            background: transparent;
+            color: var(--charcoal);
+            border: 2px solid var(--charcoal);
+            padding: .4rem 1rem;
+            font-family: 'Space Mono', monospace;
+            font-size: .66rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background .2s, color .2s;
+        }
+
+        .link-chip:hover {
+            background: var(--charcoal);
+            color: #fff;
+        }
+
+        /* Ranking bars — same visual DNA as a skyline, driven by real score data */
+        .hero-right {
+            position: relative;
+            background: var(--charcoal);
+            padding: 2rem 2rem 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rr-label {
+            font-size: .6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: .2rem;
+        }
+
+        .rr-score {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .rr-score span {
+            color: var(--yellow);
+            font-size: 1.1rem;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .bars {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            padding: 1.5rem 0 0;
+            min-height: 180px;
+        }
+
+        .bar-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .bar {
+            width: 100%;
+            border-radius: 2px 2px 0 0;
+            animation: riseUp .7s cubic-bezier(.16, 1, .3, 1) both;
+        }
+
+        @keyframes riseUp {
+            from {
+                transform: scaleY(0);
+            }
+
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+        .bar {
+            transform-origin: bottom;
+        }
+
+        .bar-cat {
+            font-size: .56rem;
+            letter-spacing: 1px;
+            color: #aaa;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .ground2 {
+            height: 6px;
+            background: #444;
+            margin-top: .6rem;
+        }
+
+        /* TICKER */
+        .ticker {
+            background: var(--charcoal);
+            color: var(--yellow);
+            font-size: .68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: .55rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px solid #444;
+        }
+
+        .ticker-inner {
+            display: inline-flex;
+            gap: 2.5rem;
+            animation: tick 26s linear infinite;
+        }
+
+        @keyframes tick {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .tsep {
+            color: var(--orange);
+        }
+
+        /* SECTION shell */
+        .section {
+            padding: 3.5rem 3.5rem;
+        }
+
+        .sec-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 1.8rem;
+        }
+
+        .sec-head h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.4rem;
+        }
+
+        .sec-head h2 span {
+            color: var(--orange);
+        }
+
+        .sec-sub {
+            font-size: .68rem;
+            color: var(--muted);
+            margin-top: .3rem;
+        }
+
+        /* Tag chips grouped by type */
+        .tag-groups {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+        }
+
+        .tag-group {
+            background: #fff;
+            border-left: 5px solid var(--teal);
+            padding: 1.2rem 1.4rem;
+        }
+
+        .tag-group.hobbies {
+            border-color: var(--pink);
+        }
+
+        .tag-group.interests {
+            border-color: var(--orange);
+        }
+
+        .tag-group h3 {
+            font-size: .62rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: .8rem;
+        }
+
+        .tag-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+        }
+
+        .tchip {
+            background: var(--charcoal);
+            color: #fff;
+            font-size: .65rem;
+            padding: .3rem .7rem;
+            letter-spacing: .5px;
+        }
+
+        .tag-group.hobbies .tchip {
+            background: var(--pink);
+        }
+
+        .tag-group.interests .tchip {
+            background: var(--orange);
+        }
+
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.3rem;
+        }
+
+        .proj-card {
+            background: #fff;
+            border: 2px solid transparent;
+            cursor: default;
+            transition: transform .2s, border-color .2s;
+            overflow: hidden;
+        }
+
+        .proj-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--orange);
+        }
+
+        .proj-card.featured {
+            grid-column: 1/3;
+        }
+
+        .proj-ph {
+            width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+        }
+
+        .proj-card.featured .proj-ph {
+            height: 210px;
+        }
+
+        .bg-p1 {
+            background: linear-gradient(135deg, #1B8A8F22, #1B8A8F55);
+        }
+
+        .bg-p2 {
+            background: linear-gradient(135deg, #E8600A22, #E8600A55);
+        }
+
+        .bg-p3 {
+            background: linear-gradient(135deg, #C0392B22, #C0392B55);
+        }
+
+        .proj-body {
+            padding: 1.1rem 1.2rem;
+        }
+
+        .proj-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.02rem;
+            color: var(--charcoal);
+            margin-bottom: .4rem;
+        }
+
+        .proj-card.featured .proj-title {
+            font-size: 1.3rem;
+        }
+
+        .proj-desc {
+            font-size: .68rem;
+            color: var(--muted);
+            line-height: 1.65;
+            margin-bottom: .7rem;
+        }
+
+        .proj-links {
+            display: flex;
+            gap: .4rem;
+            flex-wrap: wrap;
+        }
+
+        .plink {
+            font-size: .58rem;
+            color: var(--teal);
+            letter-spacing: .5px;
+            text-decoration: none;
+            border-bottom: 1px solid var(--teal);
+        }
+
+        /* Achievements */
+        .ach-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: #e8dcc9;
+        }
+
+        .ach-row {
+            background: #fff;
+            padding: 1rem 1.3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ach-left {
+            display: flex;
+            align-items: center;
+            gap: .9rem;
+        }
+
+        .ach-check {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .7rem;
+            color: #fff;
+        }
+
+        .ach-check.v {
+            background: var(--teal);
+        }
+
+        .ach-check.p {
+            background: #ccc;
+            color: var(--muted);
+        }
+
+        .ach-title {
+            font-size: .78rem;
+            color: var(--charcoal);
+            font-weight: 700;
+        }
+
+        .ach-desc {
+            font-size: .66rem;
+            color: var(--muted);
+            margin-top: .15rem;
+        }
+
+        .ach-date {
+            font-size: .62rem;
+            color: #aaa;
+            letter-spacing: .5px;
+            white-space: nowrap;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .cert-card {
+            background: #fff;
+            border-top: 4px solid var(--yellow);
+            padding: 1.1rem 1.2rem;
+        }
+
+        .cert-title {
+            font-size: .78rem;
+            color: var(--charcoal);
+            font-weight: 700;
+            margin-bottom: .3rem;
+        }
+
+        .cert-issuer {
+            font-size: .65rem;
+            color: var(--muted);
+        }
+
+        .cert-date {
+            font-size: .6rem;
+            color: #aaa;
+            margin-top: .5rem;
+            letter-spacing: .5px;
+        }
+
+        /* Clubs strip */
+        .club-strip {
+            display: flex;
+            gap: .7rem;
+            flex-wrap: wrap;
+        }
+
+        .club-chip {
+            background: var(--charcoal);
+            color: #fff;
+            padding: .55rem 1.1rem;
+            font-size: .68rem;
+            letter-spacing: .5px;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .club-chip .role {
+            color: var(--yellow);
+            font-size: .58rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--charcoal);
+            border-top: 4px solid var(--orange);
+            padding: 2.2rem 3.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .flogo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .flogo .fc {
+            color: #fff;
+        }
+
+        .flogo .fh {
+            color: var(--orange);
+        }
+
+        .flogo .fo {
+            color: var(--yellow);
+        }
+
+        .fnote {
+            font-size: .62rem;
+            color: #888;
+            letter-spacing: .5px;
+        }
+
+        @media(max-width:900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-left {
+                padding: 2.2rem 1.5rem;
+                flex-direction: column;
+            }
+
+            .hero-right {
+                padding: 1.5rem;
+            }
+
+            .tag-groups {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .proj-card.featured {
+                grid-column: auto;
+            }
+
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-logo" style="text-decoration:none;"><span class="nc">CHE</span><span class="nh">E</span><span class="no">NO</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="profile.html" class="active">Profile</a>
+            <a href="digitalBoard.html">Board</a>
+        </div>
+        <button class="nav-cta" id="nav-signout-btn">Sign out</button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-left">
+            <div class="avatar-block" id="avatar">[Initials]<span class="verified-pin" id="verified-pin" title="Verified student">✓</span></div>
+            <div class="hero-id">
+                <div class="hero-tag" id="hero-tag">[Degree] · [Year] · [Section]</div>
+                <h1 class="hero-name" id="hero-name">[Name]</h1>
+                <div class="hero-role" id="hero-role">[Department] · <b>Dept. Rank #[Rank]</b></div>
+                <p class="hero-bio" id="hero-bio">[Bio / short description about yourself]</p>
+                <div class="hero-links" id="hero-links">
+                    <a class="link-chip" href="#">GitHub ↗</a>
+                    <a class="link-chip" href="#">LeetCode ↗</a>
+                    <a class="link-chip" href="#">Portfolio ↗</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-right" id="hero-right">
+            <div class="rr-label">// Overall ranking</div>
+            <div class="rr-score">[Score] <span>pts · #[Rank] in dept</span></div>
+            <div class="bars">
+                <div class="bar-col">
+                    <div class="bar" style="height:88%;background:var(--teal)"></div>
+                    <div class="bar-cat">Coding</div>
+                </div>
+                <div class="bar-col">
+                    <div class="bar" style="height:70%;background:var(--orange)"></div>
+                    <div class="bar-cat">Projects</div>
+                </div>
+                <div class="bar-col">
+                    <div class="bar" style="height:55%;background:var(--red)"></div>
+                    <div class="bar-cat">Academics</div>
+                </div>
+                <div class="bar-col">
+                    <div class="bar" style="height:40%;background:var(--yellow)"></div>
+                    <div class="bar-cat">Community</div>
+                </div>
+                <div class="bar-col">
+                    <div class="bar" style="height:32%;background:var(--pink)"></div>
+                    <div class="bar-cat">Clubs</div>
+                </div>
+            </div>
+            <div class="ground2"></div>
+        </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker">
+        <div class="ticker-inner">
+            <span>[Tag 1]</span><span class="tsep">✦</span><span>[Tag 2]</span><span class="tsep">✦</span>
+            <span>[Tag 3]</span><span class="tsep">✦</span><span>[Tag 4]</span><span
+                class="tsep">✦</span>
+            <span>[Tag 5]</span><span class="tsep">✦</span><span>[Tag 6]</span><span class="tsep">✦</span>
+            <span>[Tag 7]</span><span class="tsep">✦</span><span>[Tag 8]</span><span class="tsep">✦</span>
+            <span>[Tag 1]</span><span class="tsep">✦</span><span>[Tag 2]</span><span class="tsep">✦</span>
+            <span>[Tag 3]</span><span class="tsep">✦</span><span>[Tag 4]</span><span
+                class="tsep">✦</span>
+            <span>[Tag 5]</span><span class="tsep">✦</span><span>[Tag 6]</span><span class="tsep">✦</span>
+        </div>
+    </div>
+
+    <!-- SKILLS / HOBBIES / INTERESTS -->
+    <section class="section">
+        <div class="sec-head">
+            <div>
+                <h2>What <span>[Name]</span> brings</h2>
+                <div class="sec-sub">// skills, hobbies and interests — used to power Discovery matches</div>
+            </div>
+        </div>
+        <div class="tag-groups">
+            <div class="tag-group">
+                <h3>Skills</h3>
+                <div class="tag-chips">
+                    <span class="tchip">[Skill 1]</span><span class="tchip">[Skill 2]</span><span
+                        class="tchip">[Skill 3]</span>
+                    <span class="tchip">[Skill 4]</span><span class="tchip">[Skill 5]</span>
+                </div>
+            </div>
+            <div class="tag-group hobbies">
+                <h3>Hobbies</h3>
+                <div class="tag-chips">
+                    <span class="tchip">[Hobby 1]</span><span class="tchip">[Hobby 2]</span><span
+                        class="tchip">[Hobby 3]</span>
+                </div>
+            </div>
+            <div class="tag-group interests">
+                <h3>Interests</h3>
+                <div class="tag-chips">
+                    <span class="tchip">[Interest 1]</span><span class="tchip">[Interest 2]</span><span
+                        class="tchip">[Interest 3]</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" style="background:#fff8ef">
+        <div class="sec-head">
+            <h2>Recent <span>projects</span></h2>
+        </div>
+        <div class="projects-grid">
+            <div class="proj-card featured">
+                <div class="proj-ph bg-p1">🛠️</div>
+                <div class="proj-body">
+                    <div class="proj-title">[Project 1 title]</div>
+                    <p class="proj-desc">[Project 1 description]</p>
+                    <div class="proj-links"><a class="plink" href="#">Repo</a><a class="plink" href="#">Live demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="proj-card">
+                <div class="proj-ph bg-p2">📊</div>
+                <div class="proj-body">
+                    <div class="proj-title">[Project 2 title]</div>
+                    <p class="proj-desc">[Project 2 description]</p>
+                    <div class="proj-links"><a class="plink" href="#">Repo</a></div>
+                </div>
+            </div>
+            <div class="proj-card">
+                <div class="proj-ph bg-p3">🎮</div>
+                <div class="proj-body">
+                    <div class="proj-title">[Project 3 title]</div>
+                    <p class="proj-desc">[Project 3 description]</p>
+                    <div class="proj-links"><a class="plink" href="#">Repo</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="section">
+        <div class="sec-head">
+            <h2>Achieve<span>ments</span></h2>
+            <div class="sec-sub">Verified by faculty appear with a teal check</div>
+        </div>
+        <div class="ach-list">
+            <div class="ach-row">
+                <div class="ach-left">
+                    <div class="ach-check v">✓</div>
+                    <div>
+                        <div class="ach-title">[Achievement 1 title]</div>
+                        <div class="ach-desc">[Verified by / Faculty name]</div>
+                    </div>
+                </div>
+                <div class="ach-date">[Date]</div>
+            </div>
+            <div class="ach-row">
+                <div class="ach-left">
+                    <div class="ach-check v">✓</div>
+                    <div>
+                        <div class="ach-title">[Achievement 2 title]</div>
+                        <div class="ach-desc">[Verified by / Faculty name]</div>
+                    </div>
+                </div>
+                <div class="ach-date">[Date]</div>
+            </div>
+            <div class="ach-row">
+                <div class="ach-left">
+                    <div class="ach-check p">…</div>
+                    <div>
+                        <div class="ach-title">[Achievement 3 title]</div>
+                        <div class="ach-desc">[Verification status]</div>
+                    </div>
+                </div>
+                <div class="ach-date">[Date]</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="section" style="background:#fff8ef">
+        <div class="sec-head">
+            <h2>Certifi<span>cations</span></h2>
+        </div>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <div class="cert-title">[Certification 1 title]</div>
+                <div class="cert-issuer">[Issuer]</div>
+                <div class="cert-date">ISSUED [Date]</div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-title">[Certification 2 title]</div>
+                <div class="cert-issuer">[Issuer]</div>
+                <div class="cert-date">ISSUED [Date]</div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-title">[Certification 3 title]</div>
+                <div class="cert-issuer">[Issuer]</div>
+                <div class="cert-date">ISSUED [Date]</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLUBS -->
+    <section class="section">
+        <div class="sec-head">
+            <h2>Club <span>memberships</span></h2>
+        </div>
+        <div class="club-strip">
+            <div class="club-chip">[Club 1 name] <span class="role">[Role]</span></div>
+            <div class="club-chip">[Club 2 name] <span class="role">[Role]</span></div>
+            <div class="club-chip">[Club 3 name] <span class="role">[Role]</span></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="flogo"><span class="fc">CHE</span><span class="fh">E</span><span class="fo">NO</span></div>
+        <div class="fnote" id="footer-note"></div>
+    </footer>
+
+<script type="module">
+import { db } from "./js/firebase.js";
+import { getCurrentUser, logOut } from "./js/auth-guard.js";
+import {
+  collection, query, orderBy, getDocs, doc, getDoc
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+async function loadProfile() {
+  const { user, profile: myProfile } = await getCurrentUser();
+  const urlParams = new URLSearchParams(window.location.search);
+  const targetUid = urlParams.get('uid') || user.uid;
+
+  let p = myProfile;
+  let uid = user.uid;
+
+  if (targetUid !== user.uid) {
+    try {
+      const snap = await getDoc(doc(db, 'users', targetUid));
+      if (snap.exists()) {
+        p = snap.data();
+        uid = targetUid;
+      }
+    } catch (e) {
+      console.warn("Could not load target user profile:", e);
+    }
+  }
+
+  // Page title
+  const fullName = `${p.firstName || ''} ${p.lastName || ''}`.trim() || 'Student';
+  document.title = `${fullName} — CHEENO`;
+
+  // Hero section
+  const initials = ((p.firstName?.[0] || '') + (p.lastName?.[0] || '')).toUpperCase();
+  const avatarBlock = document.querySelector('.avatar-block');
+  if (avatarBlock) {
+    avatarBlock.childNodes[0].textContent = initials;
+    if (!p.verified) {
+      const pin = avatarBlock.querySelector('.verified-pin');
+      if (pin) pin.style.display = 'none';
+    }
+  }
+
+  const heroTag = document.querySelector('.hero-tag');
+  if (heroTag) heroTag.textContent = `${p.department || ''} · Sem ${p.semester || '?'} · ${p.section || '—'}`;
+
+  const heroName = document.querySelector('.hero-name');
+  if (heroName) heroName.textContent = fullName;
+
+  const heroRole = document.querySelector('.hero-role');
+  if (heroRole) heroRole.innerHTML = `${p.department || ''} · ${p.industryIntegrated && p.industryIntegrated !== 'None' ? p.industryIntegrated : 'No integration'}`;
+
+  const heroBio = document.querySelector('.hero-bio');
+  if (heroBio) heroBio.textContent = p.bio || 'No bio added yet.';
+
+  // External links — hide if not available
+  const heroLinks = document.querySelector('.hero-links');
+  if (heroLinks) heroLinks.innerHTML = '<span style="font-size:.75rem;color:var(--muted);">No external links added yet.</span>';
+
+  // Ranking section — not built yet
+  const rrScore = document.querySelector('.rr-score');
+  if (rrScore) rrScore.innerHTML = '<span style="font-size:.85rem;color:var(--muted);">No ranking data yet</span>';
+  const bars = document.querySelector('.bars');
+  if (bars) bars.innerHTML = '<p style="color:var(--muted);font-size:.75rem;text-align:center;padding:2rem 0;">Rankings are computed nightly from activity.</p>';
+
+  // Ticker — fill with skills + hobbies + interests
+  const allTags = [...(p.skills || []), ...(p.hobbies || []), ...(p.interests || [])];
+  const tickerInner = document.querySelector('.ticker-inner');
+  if (tickerInner) {
+    if (allTags.length) {
+      const tagHtml = allTags.map(t => `<span>${t}</span><span class="tsep">✦</span>`).join('');
+      tickerInner.innerHTML = tagHtml + tagHtml; // duplicate for seamless scroll
+    } else {
+      tickerInner.innerHTML = '<span>Add skills, hobbies & interests to your profile</span>';
+    }
+  }
+
+  // Skills / Hobbies / Interests
+  const skillsChips = document.querySelector('.tag-group:not(.hobbies):not(.interests) .tag-chips');
+  if (skillsChips) {
+    skillsChips.innerHTML = (p.skills || []).length
+      ? p.skills.map(s => `<span class="tchip">${s}</span>`).join('')
+      : '<span style="font-size:.72rem;color:var(--muted);">No skills added yet</span>';
+  }
+
+  const hobbiesChips = document.querySelector('.tag-group.hobbies .tag-chips');
+  if (hobbiesChips) {
+    hobbiesChips.innerHTML = (p.hobbies || []).length
+      ? p.hobbies.map(h => `<span class="tchip">${h}</span>`).join('')
+      : '<span style="font-size:.72rem;color:var(--muted);">No hobbies added yet</span>';
+  }
+
+  const interestsChips = document.querySelector('.tag-group.interests .tag-chips');
+  if (interestsChips) {
+    interestsChips.innerHTML = (p.interests || []).length
+      ? p.interests.map(i => `<span class="tchip">${i}</span>`).join('')
+      : '<span style="font-size:.72rem;color:var(--muted);">No interests added yet</span>';
+  }
+
+  // Section heading with name
+  const secHeadH2 = document.querySelector('.section .sec-head h2');
+  if (secHeadH2 && secHeadH2.textContent.includes('[Name]')) {
+    secHeadH2.innerHTML = `What <span>${p.firstName || 'you'}</span> brings`;
+  }
+
+  // Projects subcollection
+  const projGrid = document.querySelector('.projects-grid');
+  if (projGrid) {
+    try {
+      const projSnap = await getDocs(query(collection(db, 'users', uid, 'projects'), orderBy('createdAt', 'desc')));
+      if (projSnap.empty) {
+        projGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">No projects added yet. Edit your profile to add some!</p>';
+      } else {
+        const bgClasses = ['bg-p1', 'bg-p2', 'bg-p3'];
+        const emojis = ['🛠️', '📊', '🎮', '💡', '🚀'];
+        projGrid.innerHTML = projSnap.docs.map((d, i) => {
+          const proj = d.data();
+          const links = (proj.links || []).map(l => `<a class="plink" href="${l}" target="_blank">Link</a>`).join('');
+          return `
+            <div class="proj-card ${i === 0 ? 'featured' : ''}">
+              <div class="proj-ph ${bgClasses[i % 3]}">${emojis[i % 5]}</div>
+              <div class="proj-body">
+                <div class="proj-title">${proj.title || 'Untitled'}</div>
+                <p class="proj-desc">${proj.description || ''}</p>
+                <div class="proj-links">${links}</div>
+              </div>
+            </div>`;
+        }).join('');
+      }
+    } catch (e) {
+      console.warn('Failed to load projects:', e);
+      projGrid.innerHTML = '<p style="color:var(--muted);">Could not load projects.</p>';
+    }
+  }
+
+  // Achievements subcollection
+  const achList = document.querySelector('.ach-list');
+  if (achList) {
+    try {
+      const achSnap = await getDocs(collection(db, 'users', uid, 'achievements'));
+      if (achSnap.empty) {
+        achList.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">No achievements yet.</p>';
+      } else {
+        achList.innerHTML = achSnap.docs.map(d => {
+          const a = d.data();
+          const checkClass = a.verified ? 'v' : 'p';
+          const checkSymbol = a.verified ? '✓' : '…';
+          const desc = a.verified ? `Verified by ${a.verifiedBy || 'faculty'}` : 'Pending verification';
+          const dateStr = a.date?.toDate ? a.date.toDate().toLocaleDateString() : (a.date || '');
+          return `
+            <div class="ach-row">
+              <div class="ach-left">
+                <div class="ach-check ${checkClass}">${checkSymbol}</div>
+                <div>
+                  <div class="ach-title">${a.title || 'Untitled'}</div>
+                  <div class="ach-desc">${desc}</div>
+                </div>
+              </div>
+              <div class="ach-date">${dateStr}</div>
+            </div>`;
+        }).join('');
+      }
+    } catch (e) {
+      console.warn('Failed to load achievements:', e);
+      achList.innerHTML = '<p style="color:var(--muted);">Could not load achievements.</p>';
+    }
+  }
+
+  // Certifications subcollection
+  const certGrid = document.querySelector('.cert-grid');
+  if (certGrid) {
+    try {
+      const certSnap = await getDocs(collection(db, 'users', uid, 'certifications'));
+      if (certSnap.empty) {
+        certGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">No certifications added yet.</p>';
+      } else {
+        certGrid.innerHTML = certSnap.docs.map(d => {
+          const c = d.data();
+          const dateStr = c.date?.toDate ? c.date.toDate().toLocaleDateString() : (c.date || '');
+          return `
+            <div class="cert-card">
+              <div class="cert-title">${c.title || 'Untitled'}</div>
+              <div class="cert-issuer">${c.issuer || ''}</div>
+              <div class="cert-date">${dateStr ? 'ISSUED ' + dateStr : ''}</div>
+            </div>`;
+        }).join('');
+      }
+    } catch (e) {
+      console.warn('Failed to load certifications:', e);
+      certGrid.innerHTML = '<p style="color:var(--muted);">Could not load certifications.</p>';
+    }
+  }
+
+  // Clubs — not built yet
+  const clubStrip = document.querySelector('.club-strip');
+  if (clubStrip) {
+    clubStrip.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">No club memberships yet.</p>';
+  }
+
+  // Footer note
+  const footerNote = document.getElementById('footer-note');
+  if (footerNote) {
+    const updated = p.updatedAt?.toDate ? p.updatedAt.toDate().toLocaleDateString() : 'recently';
+    footerNote.textContent = `Last updated ${updated} · Data from Firestore`;
+  }
+}
+
+loadProfile();
+
+// Sign out button
+const signOutBtn = document.getElementById('nav-signout-btn');
+if (signOutBtn) signOutBtn.addEventListener('click', logOut);
+</script>
+
+</body>
+
+</html>
