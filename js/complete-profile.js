@@ -8,6 +8,8 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
+import { fetchLeetCodeStats } from "./leetcode.js";
+
 const form = document.getElementById("profile-form");
 const firstNameEl = document.getElementById("first-name");
 const lastNameEl = document.getElementById("last-name");
@@ -15,6 +17,8 @@ const emailDisplay = document.getElementById("email-display");
 const deptEl = document.getElementById("department");
 const semEl = document.getElementById("semester");
 const industryEl = document.getElementById("industry");
+const leetcodeEl = document.getElementById("leetcode-handle");
+const bioEl = document.getElementById("bio");
 const errorBox = document.getElementById("profile-error");
 const submitBtn = document.getElementById("profile-submit");
 
@@ -89,9 +93,11 @@ form.addEventListener("submit", async (e) => {
   const department = deptEl.value;
   const semester = semEl.value;
   const industryIntegrated = industryEl.value;
+  const leetcodeHandle = leetcodeEl ? leetcodeEl.value.trim() : "";
+  const bio = bioEl ? bioEl.value.trim() : "";
 
   if (!firstName || !lastName || !department || !semester || !industryIntegrated) {
-    showError("Please fill in every field before continuing.");
+    showError("Please fill in every required field before continuing.");
     return;
   }
 
@@ -101,9 +107,37 @@ form.addEventListener("submit", async (e) => {
   }
 
   submitBtn.disabled = true;
+  submitBtn.textContent = "Setting up your profile…";
+
+  let leetcodeStats = null;
+  if (leetcodeHandle) {
+    try {
+      submitBtn.textContent = "Fetching LeetCode stats…";
+      leetcodeStats = await fetchLeetCodeStats(leetcodeHandle);
+    } catch (lcErr) {
+      console.warn("Could not fetch LeetCode stats during setup:", lcErr);
+      // Create minimal leetcodeStats placeholder
+      leetcodeStats = {
+        username: leetcodeHandle,
+        totalSolved: 0,
+        easySolved: 0,
+        mediumSolved: 0,
+        hardSolved: 0,
+        ranking: 0,
+        profileUrl: `https://leetcode.com/u/${leetcodeHandle}/`,
+        lastSyncedAt: new Date().toISOString()
+      };
+    }
+  }
+
   submitBtn.textContent = "Saving…";
 
   try {
+    const links = {};
+    if (leetcodeHandle) {
+      links.leetcode = `https://leetcode.com/u/${leetcodeHandle}/`;
+    }
+
     await setDoc(doc(db, "users", currentUser.uid), {
       uid: currentUser.uid,
       email: currentUser.email,
@@ -114,11 +148,14 @@ form.addEventListener("submit", async (e) => {
       department,
       semester: Number(semester),
       section: null,
-      bio: null,
+      bio: bio || null,
       industryIntegrated,
       skills: [],
       hobbies: [],
       interests: [],
+      links: links,
+      leetcodeUsername: leetcodeHandle || null,
+      leetcodeStats: leetcodeStats || null,
       verified: false,
       profileComplete: true,
       createdAt: serverTimestamp(),

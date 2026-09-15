@@ -149,24 +149,44 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .upvote-btn:hover,.upvote-btn.voted{color:var(--pin);}
 .answers-count{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted);}
 
-/* â”€â”€ RANKINGS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.rank-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:2rem;}
-.rank-tab{font-family:'IBM Plex Mono',monospace;font-size:.78rem;padding:.55rem 1.05rem;
+/* ── RANKINGS ───────────────────────────────────────────────────────────── */
+.rank-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem;}
+.rank-tab{font-family:'IBM Plex Mono',monospace;font-size:.78rem;padding:.55rem 1.15rem;
   background:transparent;border:1.5px solid var(--cork-light);color:var(--paper);
-  border-radius:3px;cursor:pointer;}
-.rank-tab.active{background:var(--highlight);color:#4A3800;border-color:var(--highlight);font-weight:600;}
-.board-slate{background:var(--cork-dark);border-radius:8px;padding:2rem 1.5rem;
-  box-shadow:inset 0 0 0 6px var(--cork);}
-.rank-row{display:grid;grid-template-columns:44px 1fr auto auto;align-items:center;gap:1rem;
-  padding:.85rem .5rem;border-bottom:1px solid rgba(255,255,255,.08);}
+  border-radius:4px;cursor:pointer;transition:all .15s;}
+.rank-tab.active{background:var(--highlight);color:#4A3800;border-color:var(--highlight);font-weight:700;}
+.board-slate{background:var(--cork-dark);border-radius:8px;padding:2.2rem 1.8rem;
+  box-shadow:inset 0 0 0 6px var(--cork), 0 12px 28px rgba(0,0,0,.25);}
+.rank-row{display:grid;grid-template-columns:52px 1.4fr 1.2fr 1fr auto;align-items:center;gap:1.2rem;
+  padding:1rem .6rem;border-bottom:1px solid rgba(255,255,255,.08);transition:background .15s;}
+.rank-row:hover{background:rgba(255,255,255,.04);}
 .rank-row:last-child{border-bottom:none;}
-.rank-num{font-family:'Big Shoulders Display',sans-serif;font-size:1.5rem;color:var(--highlight);font-weight:800;}
-.rank-name{color:#fff;font-weight:600;font-size:.95rem;}
-.rank-dept{display:block;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:#C9BBA0;margin-top:.15rem;}
-.rank-pts{font-family:'IBM Plex Mono',monospace;color:var(--paper);font-size:.85rem;}
-.rank-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--tack);text-decoration:underline;
-  cursor:pointer;background:none;border:none;}
-.rank-note{color:#C9BBA0;font-size:.9rem;margin-top:1.5rem;text-align:center;}
+.rank-num{font-family:'Big Shoulders Display',sans-serif;font-size:1.6rem;color:var(--highlight);font-weight:800;display:flex;align-items:center;gap:.3rem;}
+.rank-num.top-1{color:#FFD700;}
+.rank-num.top-2{color:#E0E0E0;}
+.rank-num.top-3{color:#CD7F32;}
+.rank-name{color:#fff;font-weight:700;font-size:.98rem;display:flex;align-items:center;gap:.5rem;}
+.rank-dept{display:block;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:#C9BBA0;margin-top:.2rem;}
+.rank-lc{display:flex;flex-direction:column;gap:.25rem;}
+.rank-lc-handle{font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--highlight);font-weight:600;text-decoration:none;}
+.rank-lc-handle:hover{text-decoration:underline;}
+.rank-lc-global{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:#A89B85;}
+.rank-pts{font-family:'IBM Plex Mono',monospace;color:var(--paper);font-size:.84rem;text-align:right;}
+.rank-diff-chips{display:flex;gap:.3rem;margin-top:.2rem;}
+.rank-diff-chip{font-size:.62rem;padding:.15rem .35rem;border-radius:2px;font-family:'IBM Plex Mono',monospace;}
+.rank-diff-chip.e{background:rgba(27,138,143,0.3);color:#68D8D6;}
+.rank-diff-chip.m{background:rgba(232,96,10,0.3);color:#FFB86C;}
+.rank-diff-chip.h{background:rgba(192,57,43,0.3);color:#FF8585;}
+.rank-link{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--highlight);border:1px solid var(--cork-light);
+  padding:.4rem .8rem;border-radius:3px;cursor:pointer;background:rgba(255,255,255,0.06);text-decoration:none;
+  display:inline-flex;align-items:center;gap:.3rem;transition:all .15s;}
+.rank-link:hover{background:var(--highlight);color:#4A3800;border-color:var(--highlight);}
+.rank-note{color:#C9BBA0;font-size:.85rem;margin-top:1.8rem;text-align:center;}
+
+@media(max-width:850px){
+  .rank-row{grid-template-columns:40px 1fr auto;gap:.8rem;}
+  .rank-lc,.rank-pts{display:none;}
+}
 
 /* â”€â”€ FACULTY + FEEDBACK â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .fac-split{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:start;}
@@ -331,15 +351,15 @@ footer{background:var(--cork-dark);color:#D8CBB4;padding:3.5rem 0 2rem;}
 <section id="rankings" class="sec-alt sec-pad">
   <div class="wrap fade-up">
     <div class="sec-head">
-      <span class="eyebrow">Ranking</span>
-      <h2>Recognition you can actually explain.</h2>
-      <p>Every point traces back to something you did â€” an upvoted answer, a verified achievement, a logged event. Tap a name for the full breakdown.</p>
+      <span class="eyebrow">Campus Leaderboard</span>
+      <h2>Real Coding Rank. Verified on LeetCode.</h2>
+      <p>Live student rankings powered by real-time LeetCode statistics, problem milestones and global standings. Tap a student to view their projects, achievements and profile.</p>
     </div>
 
     <div class="board-slate">
       <div class="rank-tabs" id="rank-tabs"></div>
       <div id="rank-list"></div>
-      <p class="rank-note">Scores recompute nightly from your activity â€” nothing is entered by hand.</p>
+      <p class="rank-note">Rankings sync directly with student LeetCode accounts — connect yours in your profile to join the leaderboard.</p>
     </div>
   </div>
 </section>
@@ -463,8 +483,9 @@ const boardCategories = ['All', 'Question', 'Announcement', 'Discussion', 'Help'
 let activeBoardCat = 'All';
 let boardPosts = [];
 
-const rankCategories = ['Overall'];
-let activeRankCat = 'Overall';
+const rankCategories = ['Overall Campus', 'BTECH', 'BCA', 'BBA', 'Most Solved'];
+let activeRankCat = 'Overall Campus';
+let allRankedStudents = [];
 let rankings = {};
 
 let faculty = [];
@@ -723,7 +744,51 @@ async function upvote(idx, el) {
   }
 }
 
-/* â”€â”€ RENDER: RANKINGS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── RENDER: RANKINGS ───────────────────────────────────────────────────────── */
+async function loadRankings() {
+  try {
+    const snap = await getDocs(query(collection(db, 'users'), where('profileComplete', '==', true)));
+    allRankedStudents = snap.docs.map(d => {
+      const data = d.data();
+      const stats = data.leetcodeStats || {};
+      const lcUser = data.leetcodeUsername || stats.username || '';
+      return {
+        id: d.id,
+        name: `${data.firstName || ''} ${data.lastName || ''}`.trim() || 'Student',
+        dept: data.department || '—',
+        semester: data.semester || '?',
+        lcUsername: lcUser,
+        lcUrl: stats.profileUrl || (lcUser ? `https://leetcode.com/u/${lcUser}/` : ''),
+        lcRank: stats.ranking || 0,
+        totalSolved: stats.totalSolved || 0,
+        easy: stats.easySolved || 0,
+        medium: stats.mediumSolved || 0,
+        hard: stats.hardSolved || 0
+      };
+    });
+
+    const sortLeetCode = (a, b) => {
+      if (a.lcRank > 0 && b.lcRank > 0) return a.lcRank - b.lcRank;
+      if (a.lcRank > 0) return -1;
+      if (b.lcRank > 0) return 1;
+      return b.totalSolved - a.totalSolved;
+    };
+
+    const sortSolved = (a, b) => b.totalSolved - a.totalSolved;
+
+    rankings['Overall Campus'] = [...allRankedStudents].sort(sortLeetCode);
+    rankings['BTECH'] = allRankedStudents.filter(s => s.dept === 'BTECH').sort(sortLeetCode);
+    rankings['BCA'] = allRankedStudents.filter(s => s.dept === 'BCA').sort(sortLeetCode);
+    rankings['BBA'] = allRankedStudents.filter(s => s.dept === 'BBA').sort(sortLeetCode);
+    rankings['Most Solved'] = [...allRankedStudents].sort(sortSolved);
+
+    renderRankList();
+  } catch (err) {
+    console.warn("Failed to load rankings:", err);
+    renderRankList();
+  }
+}
+
 function renderRankTabs() {
   const el = document.getElementById('rank-tabs');
   el.innerHTML = rankCategories.map(c =>
@@ -743,19 +808,45 @@ function renderRankList() {
   const list = rankings[activeRankCat] || [];
   const el = document.getElementById('rank-list');
   if (!list.length) {
-    el.innerHTML = `<p style="color:#C9BBA0;text-align:center;">No ranking data available yet. Rankings are computed nightly from activity.</p>`;
+    el.innerHTML = `<p style="color:#C9BBA0;text-align:center;padding:2rem 0;">No student rankings available in this category yet. Connect your LeetCode profile to claim the top spot!</p>`;
     return;
   }
+
   el.innerHTML = list.map((r, i) => {
-    const name = r.name || '';
-    const dept = r.dept || '';
-    const pts = r.points != null ? r.points : 0;
+    let medalClass = '';
+    let medalLabel = `#${i + 1}`;
+    if (i === 0) { medalClass = 'top-1'; medalLabel = '🥇 #1'; }
+    else if (i === 1) { medalClass = 'top-2'; medalLabel = '🥈 #2'; }
+    else if (i === 2) { medalClass = 'top-3'; medalLabel = '🥉 #3'; }
+
+    const lcCol = r.lcUsername
+      ? `<div class="rank-lc">
+           <a class="rank-lc-handle" href="${r.lcUrl}" target="_blank">@${r.lcUsername} ↗</a>
+           <span class="rank-lc-global">Global ${r.lcRank ? '#' + r.lcRank.toLocaleString() : 'Unranked'}</span>
+         </div>`
+      : `<div class="rank-lc"><span style="font-size:.68rem;color:#A89B85;">No LeetCode linked</span></div>`;
+
+    const solvedCol = r.totalSolved > 0
+      ? `<div class="rank-pts">
+           <b>${r.totalSolved}</b> solved
+           <div class="rank-diff-chips">
+             <span class="rank-diff-chip e" title="Easy">E:${r.easy}</span>
+             <span class="rank-diff-chip m" title="Medium">M:${r.medium}</span>
+             <span class="rank-diff-chip h" title="Hard">H:${r.hard}</span>
+           </div>
+         </div>`
+      : `<div class="rank-pts" style="color:#A89B85;font-size:.75rem;">0 solved</div>`;
+
     return `
       <div class="rank-row">
-        <span class="rank-num">${i + 1}</span>
-        <span><span class="rank-name">${name}</span><span class="rank-dept">${dept}</span></span>
-        <span class="rank-pts">${pts} pts</span>
-        <button class="rank-link">breakdown</button>
+        <span class="rank-num ${medalClass}">${medalLabel}</span>
+        <span>
+          <span class="rank-name">${r.name}</span>
+          <span class="rank-dept">${r.dept} · Sem ${r.semester}</span>
+        </span>
+        ${lcCol}
+        ${solvedCol}
+        <a href="profile.html?uid=${r.id}" class="rank-link">Profile →</a>
       </div>`;
   }).join('');
 }
@@ -894,11 +985,9 @@ async function init() {
     loadStats(),
     loadStudents(),
     loadBoardPosts(),
-    loadFaculty()
+    loadFaculty(),
+    loadRankings()
   ]);
-
-  // Rankings are empty until the scheduled function is built
-  renderRankList();
 }
 
 /* â”€â”€ SCROLL REVEAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
