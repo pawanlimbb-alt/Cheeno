@@ -9,6 +9,9 @@ const STYLES = `
   --cheeno-orange:#E8600A; --cheeno-teal:#1B8A8F;
   --cheeno-red:#C0392B; --cheeno-yellow:#F5C518;
   --cheeno-pink:#E8738A; --cheeno-muted:#6B5B4E;
+
+  /* light-mode logo tint — darker than --cheeno-yellow so it reads on white */
+  --cheeno-amber:#C99A00;
 }
 
 /* ── HEADER ─────────────────────────────────────────────── */
@@ -16,22 +19,34 @@ const STYLES = `
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 2rem;height:56px;
-  background:var(--cheeno-charcoal);
-  border-bottom:3px solid var(--cheeno-orange);
+
+  /* translucent white + blur */
+  background:rgba(255,255,255,.82);
+  -webkit-backdrop-filter:blur(14px) saturate(180%);
+  backdrop-filter:blur(14px) saturate(180%);
+
+  border-bottom:2px solid var(--cheeno-orange);
   font-family:'Space Mono',monospace;
 }
+
+/* Fallback for browsers without backdrop-filter */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .cheeno-nav{background:rgba(255,255,255,.96);}
+}
+
 .cheeno-logo{
   font-family:'Bebas Neue',sans-serif;font-size:1.6rem;
   letter-spacing:2px;display:flex;gap:2px;align-items:baseline;
   text-decoration:none;cursor:pointer;
 }
-.cheeno-logo .ch-ch{color:#fff;}
+/* on white: charcoal / orange / darkened amber */
+.cheeno-logo .ch-ch{color:var(--cheeno-charcoal);}
 .cheeno-logo .ch-ee{color:var(--cheeno-orange);}
-.cheeno-logo .ch-no{color:var(--cheeno-yellow);}
+.cheeno-logo .ch-no{color:var(--cheeno-amber);}
 
 .cheeno-nav-links{display:flex;gap:1.8rem;}
 .cheeno-nav-links a{
-  color:#bbb;text-decoration:none;font-size:.63rem;letter-spacing:2px;
+  color:var(--cheeno-muted);text-decoration:none;font-size:.63rem;letter-spacing:2px;
   text-transform:uppercase;transition:color .2s;cursor:pointer;
 }
 .cheeno-nav-links a:hover,
